@@ -10,9 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_02_160438) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_113812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_achievements_on_user_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer "number"
+    t.string "name"
+    t.bigint "level_id", null: false
+    t.text "concept"
+    t.text "task"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_lessons_on_level_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.integer "number"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_lessons", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "user_id", null: false
+    t.bigint "lesson_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_user_lessons_on_lesson_id"
+    t.index ["user_id"], name: "index_user_lessons_on_user_id"
+  end
+
+  create_table "user_levels", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "user_id", null: false
+    t.bigint "level_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_user_levels_on_level_id"
+    t.index ["user_id"], name: "index_user_levels_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +69,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_02_160438) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "points", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "achievements", "users"
+  add_foreign_key "lessons", "levels"
+  add_foreign_key "user_lessons", "lessons"
+  add_foreign_key "user_lessons", "users"
+  add_foreign_key "user_levels", "levels"
+  add_foreign_key "user_levels", "users"
 end
