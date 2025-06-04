@@ -1,3 +1,4 @@
+# config/routes.rb
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
@@ -9,4 +10,6 @@ Rails.application.routes.draw do
   resources :lessons, only: [:show]
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :user_lessons, only: [:show]
 end
