@@ -39,16 +39,18 @@
 
 .card-next-lesson {
   overflow: hidden;
-  height: 120px;
+  height: 200px;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  border: 1px solid black;
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
 }
 
 .card-next-lesson img {
   height: 100%;
-  width: 120px;
+  width: 40%;
   object-fit: cover;
 }
 
@@ -68,4 +70,5 @@
 
 .card-next-lesson .card-next-lesson-info {
   padding: 16px;
+  padding-left: 32px;
 }
