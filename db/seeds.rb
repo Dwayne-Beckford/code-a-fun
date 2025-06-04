@@ -50,12 +50,22 @@ puts "Creating user levels"
 daves_last_level = UserLevel.create(completed: false, user: dave, level: level_one)
 janes_last_level = UserLevel.create(completed: false, user: jane, level: level_one)
 
-puts "Creating user lessons"
-daves_last_lesson = UserLesson.create(completed: true, user: dave, lesson: lesson_five)
-janes_last_lesson = UserLesson.create(completed: true, user: jane, lesson: lesson_three)
+puts "Creating Dave's progress"
+# Marks multiple lessons as complete (from 1 to 5)
+[lesson_one, lesson_two, lesson_three, lesson_four, lesson_five].each do |lesson|
+  UserLesson.create(completed: true, user: dave, lesson: lesson)
+end
+
+puts "Creating Jane's progress"
+[lesson_one, lesson_two, lesson_three].each do |lesson|
+  UserLesson.create(completed: true, user: jane, lesson: lesson)
+end
+
+puts "Creating Dave's achievements"
+daves_achievement = Achievement.create(user: dave, name: "Gold Medal")
 
 puts "Creating Jane's achievements"
-janes_achievement = Achievement.create(user: jane, name: "Gold Medal")
+janes_achievement = Achievement.create(user: jane, name: "Silver Medal")
 
 # Done!
 puts "All done! Created #{User.count} users, #{Lesson.count} lessons, #{Level.count} levels, #{Achievement.count} achievements and #{UserLesson.count} progresses (user lessons)"
