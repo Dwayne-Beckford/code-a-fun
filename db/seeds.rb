@@ -23,6 +23,7 @@ User.destroy_all
 puts "Creating user Dave"
 dave = User.create(email:"dave@test.com", password: "123456", name: "Dave", points: 50)
 jane = User.create(email:"jane@test.com", password: "123456", name: "Jane", points: 30)
+larry = User.create(email:"larry@test.com", password: "123456", name: "Larry", points: 0)
 
 puts "Creating Level Basics"
 level_one = Level.create(number: 1, name: "Basics")
