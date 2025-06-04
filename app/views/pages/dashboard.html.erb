@@ -1,0 +1,21 @@
+<h1>Dashboard</h1>
+
+<h2>User completed lesson</h2>
+
+<% @completed_lessons.each do |user_lesson| %>
+<div class="card">
+<p><%= user_lesson.completed %> </p>
+<p><%= user_lesson.lesson.name %></p>
+<p><%= user_lesson.lesson.concept %></p>
+</div>
+<% end %>
+
+<h2>Next lesson</h2>
+<p><%= @next_lesson.name %></p>
+<p><%= @next_lesson.concept%></p>
+
+<h2>Levels</h2>
+<% @levels.each do | level| %>
+<p><%= level.completed%></p>
+<p><%= level.lesson.name %></p>
+<% end %>
