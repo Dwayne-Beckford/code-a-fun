@@ -1,0 +1,37 @@
+// User lesson card (past lessons)
+.card-lesson {
+  overflow: hidden;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid black;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.card-lesson > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-lesson h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-lesson p {
+  font-size: 12px;
+  opacity: .7;
+  margin-bottom: 3px;
+}
+
+
+.card-lesson .card-lesson-infos {
+  padding: 16px;
+}
+
+.card-lesson-infos {
+  right: 16px;
+  top: -20px;
+}
