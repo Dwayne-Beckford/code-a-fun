@@ -6,6 +6,10 @@
   border: 1px solid black;
   max-width: 300px;
   max-height: 300px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // ensures content fills vertical space
 }
 
 .card-lesson > img {
@@ -23,15 +27,9 @@
 .card-lesson p {
   font-size: 12px;
   opacity: .7;
-  margin-bottom: 3px;
 }
 
-
-.card-lesson .card-lesson-infos {
-  padding: 16px;
-}
-
-.card-lesson-infos {
-  right: 16px;
-  top: -20px;
+.card-lesson-info {
+  padding: 16px 16px 0px 16px;
+  flex-grow: 1; // helps it take remaining space
 }
