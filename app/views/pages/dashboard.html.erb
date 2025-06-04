@@ -1,26 +1,37 @@
-<h1>Dashboard</h1>
+<div class="container">
+  <h1>#Dashboard</h1>
 
-<h2>Next lesson</h2>
-<p><%= @next_lesson.name %></p>
-<p><%= @next_lesson.concept%></p>
-
-<% if @completed_lessons.any? %>
-  <h2>Want to Refresh Your Memory?</h2>
-  <% @completed_lessons.each do |user_lesson| %>
-  <div class="card-lesson">
-    <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
-    <div class="card-lesson-info">
-      <h2><%= user_lesson.lesson.name %></h2>
-      <p><%= user_lesson.lesson.description %></p>
+  <h2>Next lesson</h2>
+  <div class="card-next-lesson">
+    <%= image_tag('seed/Classes.png', alt: 'Classes') %>
+    <div class="card-next-lesson-info">
+      <h2><%= @next_lesson.name %></h2>
+      <p><%= @next_lesson.description%></p>
     </div>
   </div>
-  <% end %>
-<% else %>
-  <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
-<% end %>
 
-<h2>Levels</h2>
-<% @levels.each do | level| %>
-<p><%= level.completed%></p>
-<p><%= level.lesson.name %></p>
-<% end %>
+  <h2>Next lesson</h2>
+  <p><%= @next_lesson.name %></p>
+  <p><%= @next_lesson.concept %></p>
+
+  <% if @completed_lessons.any? %>
+    <h2>Want to Refresh Your Memory?</h2>
+    <% @completed_lessons.each do |user_lesson| %>
+    <div class="card-lesson">
+      <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+      <div class="card-lesson-info">
+        <h2><%= user_lesson.lesson.name %></h2>
+        <p><%= user_lesson.lesson.description %></p>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+    <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
+  <% end %>
+
+  <h2>Levels</h2>
+  <% @levels.each do | level| %>
+  <p><%= level.completed%></p>
+  <p><%= level.lesson.name %></p>
+  <% end %>
+</div>

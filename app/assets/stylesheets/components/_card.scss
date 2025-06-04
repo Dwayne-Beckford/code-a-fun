@@ -1,4 +1,4 @@
-// User lesson card (past lessons)
+// Finished lessons card
 .card-lesson {
   overflow: hidden;
   background: white;
@@ -32,4 +32,40 @@
 .card-lesson-info {
   padding: 16px 16px 0px 16px;
   flex-grow: 1; // helps it take remaining space
+}
+
+
+// Next lesson card
+
+.card-next-lesson {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.card-next-lesson img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-next-lesson h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-next-lesson p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-next-lesson .card-next-lesson-info {
+  padding: 16px;
 }
