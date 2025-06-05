@@ -1,40 +1,39 @@
-<!-- Modal for the concept app/views/pages/show.html.erb -->
-<h1><%= @user_lesson.lesson.name %>'s Concepts </h1>
-<p><%= @user_lesson.lesson.concept %></p>
-<%= link_to "Back to lessons", user_lesson_path(@user_lesson)%>
-
-
-<!-- Feedback response -->
-<p><%=  @content %></p>
-
 <!-- app/views/user_lessons/show.html.erb -->
-<!-- Use of Bootstrap v5.3 is paramount in any case.-->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Learner Task
-</button>
+<div class="container">
+  <h1>User Lesson Page</h1>
+  <h2>The Task</h2>
+  <!-- Displaying lesson task -->
+  <p><%= @user_lesson.lesson.task %></p>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"><%= @user_lesson.lesson.concept %>'s Concept</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= render "task" %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+  <h2>User answer</h2>
+  <p>puts 'Hey Sam! Let’s grab some popcorn and code together!'</p>
+
+  <h2>Feedback Response</h2>
+  <!-- Feedback response -->
+  <p><%=  @content %></p>
+
+
+  <!-- Use of Bootstrap v5.3 is paramount in any case.-->
+  <!-- Button trigger Concept modal -->
+  <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Concept
+  </button>
+
+  <!-- Concept modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><%= @user_lesson.lesson.name %></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= render "concept" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondaryone" data-bs-dismiss="modal">Got it!</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<h1><%= @user_lesson.lesson.name %>'s Concepts </h1>
-<p><%= @user_lesson.lesson.concept %></p>
-<%= link_to "Back to lessons", user_lesson_path(@user_lesson)%>
-<!-- app/views/pages/show.html.erb -->
