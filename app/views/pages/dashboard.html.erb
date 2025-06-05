@@ -1,27 +1,42 @@
-<h1>Dashboard</h1>
+<div class="container">
+  <h1 class="mt-2">#Dashboard</h1>
 
-<h2>User completed lesson</h2>
+  <h2 class="mt-2">Next Lesson</h2>
+  <div class="card-next-lesson">
+    <%= image_tag('seed/Classes.png', alt: 'Classes') %>
+    <div class="card-next-lesson-info">
+      <h2><%= @next_lesson.name %></h2>
+      <p><%= @next_lesson.description%></p>
+      <a class="btn btn-primary mt-2">START</a>
+    </div>
+  </div>
 
-<% @completed_lessons.each do |user_lesson| %>
-<div class="card">
-<p><%= user_lesson.completed %> </p>
-<p><%= user_lesson.lesson.name %></p>
-<p><%= user_lesson.lesson.concept %></p>
+  <h2 class="mt-5">Want to Refresh Your Memory?</h2>
+  <% if @completed_lessons.any? %>
+    <% @completed_lessons.each do |user_lesson| %>
+    <div class="card-lesson">
+      <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+      <div class="card-lesson-info">
+        <h2><%= user_lesson.lesson.name %></h2>
+        <p><%= user_lesson.lesson.description %></p>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+    <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
+  <% end %>
+
+
+  <h2 class="mt-5">Levels</h2>
+  <% @levels.each do | level| %>
+  <p><%= level.completed%></p>
+  <p><%= level.lesson.name %></p>
+  <% end %>
 </div>
-<% end %>
-
-<h2>Next lesson</h2>
-<p><%= @next_lesson.name %></p>
-<p><%= @next_lesson.concept%></p>
-
-<h2>Levels</h2>
-<% @levels.each do | level| %>
-<p><%= level.completed%></p>
-<p><%= level.lesson.name %></p>
-<% end %>
 
 <%# button one write value in capital %>
 <a type="button" class="btn-one">RUN</a>
 
 <%# button two write value in capital %>
 <a type="button" class="btn-second">SECOND</a>
+
