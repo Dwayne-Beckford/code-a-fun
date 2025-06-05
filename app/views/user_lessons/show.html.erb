@@ -1,4 +1,4 @@
 <!-- app/views/pages/show.html.erb -->
-<h1><%= @user_lesson.name %>'s Concepts </h1>
-<p><%= @user_lesson.name %></p>
+<h1><%= @user_lesson.lesson.name %>'s Concepts </h1>
+<p><%= @user_lesson.lesson.concept %></p>
 <%= link_to "Back to lessons", user_lesson_path(@user_lesson)%>
