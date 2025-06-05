@@ -30,7 +30,28 @@ level_one = Level.create(number: 1, name: "Basics")
 level_two = Level.create(number: 2, name: "Intermediate")
 
 puts "Creating Lesson 1"
-lesson_one = Lesson.create(name: "Arrays", number: 1, concept: "An array is a way of organizing data in a collection, where each item (called an element) has a specific position or index. Think of it as a row of numbered boxes where you can store values. In programming, arrays are often used to store multiple values of the same type, making it easier to access and manipulate them.", description: "In this lesson you'll learn everything about arrays: what they are, how to write them and more.", task: "Create an array with fruit", level: level_one)
+lesson_one = Lesson.create(name: "Output & Variables", number: 1, concept: "Let’s break it down:
+  
+puts — This tells Ruby to say something. It prints to the screen.
+
+Variables — Think of these as little boxes where Ruby can store information. You can name your box (like name or age) and fill it with stuff (like 'Alex' or 27).
+
+📦 Example: name = 'Alex'
+puts 'Hello, \#{name}!', 
+
+🧪 What’s happening? We store 'Alex' in the box called name. Then we ask Ruby to say 'Hello, Alex!' by using \#{name} — that’s called string interpolation (fancy term, easy trick).",
+
+description: "Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables. It’s like giving your computer a brain… and a voice.", task: "Mission: Make Ruby Your Hype Buddy
+
+Write a short Ruby program that:
+
+Stores your name in a variable.
+
+Stores your favorite snack in another variable.
+
+Uses puts to print a fun message like:  Hey Sam! Let's grab some popcorn and code together! 🚀
+
+💬 Use your own name and snack. Make it YOU. And add a fun emoji if you like!", level: level_one)
 
 puts "Creating Lesson 2"
 lesson_two = Lesson.create(name: "Classes", number: 2, concept: "In object-oriented programming, a class defines the shared aspects of objects created from the class. The capabilities of a class differ between programming languages, but generally the shared aspects consist of state (variables) and behavior (methods) that are each either associated with a particular object or with all objects of that class.", description: "In this lesson you'll learn everything about classes: what they are, how to write them and more.", task: "Create a class for animals", level: level_one)
