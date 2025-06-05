@@ -1,0 +1,27 @@
+.btn-one {
+    border-radius: 50px;
+    background-color: $purple;
+    font-family: $headers-font;
+    text-align: center;
+    color: $offwhite;
+    text-decoration: none;
+    padding: 8px 50px;
+    margin-left: 16px;
+}
+
+.btn-one:hover {
+    background-color: #6530BC;
+    color: $offwhite;
+}
+
+.btn-second {
+    border: 1px, solid, black;
+    border-radius: 50px;
+    font-family: $headers-font;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    padding: 8px 50px;
+    margin-left: 16px;
+
+}

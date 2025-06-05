@@ -1,0 +1,74 @@
+// Finished lessons card
+.card-lesson {
+  overflow: hidden;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid black;
+  max-width: 300px;
+  max-height: 300px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // ensures content fills vertical space
+}
+
+.card-lesson > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-lesson h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-lesson p {
+  font-size: 12px;
+  opacity: .7;
+}
+
+.card-lesson-info {
+  padding: 16px 16px 0px 16px;
+  flex-grow: 1; // helps it take remaining space
+}
+
+
+// Next lesson card
+
+.card-next-lesson {
+  overflow: hidden;
+  height: 200px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.card-next-lesson img {
+  height: 100%;
+  width: 40%;
+  object-fit: cover;
+}
+
+.card-next-lesson h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-next-lesson p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-next-lesson .card-next-lesson-info {
+  padding: 16px;
+  padding-left: 32px;
+}
