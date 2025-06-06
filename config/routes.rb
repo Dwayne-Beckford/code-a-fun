@@ -1,3 +1,6 @@
+# config/routes.rb
+# [...]
+# The `new` route needs to be placed before the `show` route
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
@@ -10,4 +13,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :user_lessons, only: [:show]
+  get "user_lessons/:id/new", to: "feedbacks#new"
 end
