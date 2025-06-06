@@ -6,7 +6,11 @@
   <p><%= @user_lesson.lesson.task %></p>
 
   <h2>User answer</h2>
-  <p>puts 'Hey Sam! Let’s grab some popcorn and code together!'</p>
+
+  <%= simple_form_for @user_lesson do |f|  %>
+    <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!" %>
+    <%= f.submit "Run", class: "btn btn-one"  %>
+  <% end %>
 
   <h2>Feedback Response</h2>
   <!-- Feedback response -->
