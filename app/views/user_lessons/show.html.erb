@@ -9,12 +9,13 @@
 
   <%= simple_form_for @user_lesson do |f|  %>
     <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!" %>
-    <%= f.submit "Run", class: "btn btn-one"  %>
+    <%= f.submit "Run", class: "btn btn-one" %>
   <% end %>
 
   <h2>Feedback Response</h2>
   <!-- Feedback response -->
-  <p><%=  @content %></p>
+  <%= turbo_stream_from dom_id(@user_lesson) %>
+  <div id="ai_response"></div>
 
 
   <!-- Use of Bootstrap v5.3 is paramount in any case.-->
