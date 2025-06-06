@@ -19,4 +19,5 @@ class PagesController < ApplicationController
     # see all completed user levels
     @levels = UserLevel.where("completed = ? AND user_id = ?", true, current_user.id)
   end
+
 end
