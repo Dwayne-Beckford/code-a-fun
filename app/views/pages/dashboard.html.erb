@@ -7,12 +7,14 @@
     <div class="card-next-lesson-info">
       <h2><%= @next_lesson.name %></h2>
       <p><%= @next_lesson.description%></p>
+
       <a class="btn-one mt-2">START</a>
     </div>
   </div>
 
   <h2 class="mt-5">Want to Refresh Your Memory?</h2>
   <% if @completed_lessons.any? %>
+  <div class="lessons-grid">
     <% @completed_lessons.each do |user_lesson| %>
     <div class="card-lesson">
       <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
@@ -22,20 +24,14 @@
       </div>
     </div>
     <% end %>
+  </div>
   <% else %>
     <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
   <% end %>
 
-
-  <h2 class="mt-5">Levels</h2>
+<h2 class="mt-5">Levels</h2>
   <% @levels.each do | level| %>
   <p><%= level.completed%></p>
   <p><%= level.lesson.name %></p>
   <% end %>
 </div>
-
-<%# button one write value in capital %>
-<a type="button" class="btn-one">RUN</a>
-
-<%# button two write value in capital %>
-<a type="button" class="btn-second">SECOND</a>
