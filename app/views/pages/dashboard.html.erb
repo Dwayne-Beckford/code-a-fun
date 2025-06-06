@@ -19,7 +19,7 @@
     <div class="card-lesson">
       <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
       <div class="card-lesson-info">
-        <h2><%= user_lesson.lesson.name %></h2>
+        <h2><%= link_to user_lesson.lesson.name, user_lesson_path(user_lesson) %></h2>
         <p><%= user_lesson.lesson.description %></p>
       </div>
     </div>

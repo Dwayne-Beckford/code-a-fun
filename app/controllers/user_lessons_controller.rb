@@ -5,7 +5,7 @@ class UserLessonsController < ApplicationController
   # before_action :set_user_lesson, only: %i[id]
 
   def show
-    @user_lesson = UserLesson.find(params[:id]) 
+    @user_lesson = UserLesson.find(params[:id])
   end
 
   def update
@@ -38,7 +38,12 @@ class UserLessonsController < ApplicationController
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: user_lesson.user_input} ]
+      messages: [{ role: "user", content: "Provide feedback to a students coding input in Ruby. Use fun encouraging tone of voice and be very specific about where the error is. Do not give an answer but you can ask questions that will help the student figure it out. The feedback shouldn’t be too long. Bear in mind you don’t know what student attempt is this so avoid phrases like “great start”.
+Here’s the lesson name:#{@user_lesson.lesson.name}
+Here’s the lesson description:#{@user_lesson.lesson.description}
+Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
+Here’s the lesson task:#{@user_lesson.lesson.task}
+Here’s the student answer:#{user_lesson.user_input}"}]
     })
     chatgpt_response["choices"][0]["message"]["content"]
   end
