@@ -10,7 +10,6 @@ class UserLessonsController < ApplicationController
 
   def feedback
     @user_lesson = UserLesson.find(params[:id])
-
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
@@ -22,6 +21,11 @@ Here’s the lesson task:#{@user_lesson.lesson.task}
 Here’s the student answer: puts 'Hey Sam! Let’s grab some popcorn and code together!'"}]
     })
     @content = chatgpt_response["choices"][0]["message"]["content"]
+    respond_to do |format|
+      format.json {
+        render json: @content.to_json
+      }
+    end
   end
   private
 

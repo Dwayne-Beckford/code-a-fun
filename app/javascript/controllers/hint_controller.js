@@ -12,6 +12,11 @@ export default class extends Controller {
       method: "POST",
       headers: {"Accept": "application/json", 'X-CSRF-Token': this.csrfToken()},
       body: {"user_answer": `${this.formInputTarget.value}`}
-    } )
+    } ).then(response => {
+      console.log(response)
+      return response.json()
+    }).then(data => {
+      console.log(data)
+    })
   }
 }
