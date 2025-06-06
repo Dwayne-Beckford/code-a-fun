@@ -6,12 +6,13 @@
   <p><%= @user_lesson.lesson.task %></p>
 
   <h2>User answer</h2>
-
+<div data-controller="hint">
   <%= simple_form_for @user_lesson do |f|  %>
-    <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!" %>
+    <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}} %>
     <%= f.submit "Run", class: "btn btn-one"  %>
   <% end %>
-
+  <button data-action="click->hint#sendFeedback">Feedback</button>
+</div>
   <h2>Feedback Response</h2>
   <!-- Feedback response -->
   <p><%=  @content %></p>
@@ -22,6 +23,8 @@
   <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#conceptModal">
     Concept
   </button>
+
+
 
   <!-- Concept modal -->
   <div class="modal fade" id="conceptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

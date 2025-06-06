@@ -5,7 +5,12 @@ class UserLessonsController < ApplicationController
   # before_action :set_user_lesson, only: %i[id]
 
   def show
-    @user_lesson = UserLesson.find(params[:id]) 
+    @user_lesson = UserLesson.find(params[:id])
+  end
+
+  def feedback
+    @user_lesson = UserLesson.find(params[:id])
+
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
@@ -18,7 +23,6 @@ Here’s the student answer: puts 'Hey Sam! Let’s grab some popcorn and code t
     })
     @content = chatgpt_response["choices"][0]["message"]["content"]
   end
-
   private
 
   # def user_lesson_params

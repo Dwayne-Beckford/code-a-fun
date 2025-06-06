@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :user_lessons, only: [:show]
+  post "/user_lessons/:id/feedbacks", to: "user_lessons#feedback"
 end
