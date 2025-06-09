@@ -86,7 +86,7 @@ puts "Creating Dave's progress"
 end
 
 puts "Creating Jane's progress"
-[lesson_one, lesson_two, lesson_three].each do |lesson|
+[lesson_one, lesson_two, lesson_three, lesson_four].each do |lesson|
   UserLesson.create(completed: true, user: jane, lesson: lesson)
 end
 

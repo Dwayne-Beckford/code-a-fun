@@ -1,4 +1,8 @@
 <div class="container">
+<h3>Achievement's</h3>
+<%= current_user.points%>
+<%= current_user.name %>
+
   <h1 class="mt-2">Dashboard</h1>
 
   <h2 class="mt-2">Next Lesson</h2>
@@ -10,7 +14,11 @@
       
       <!--User next leeson-->
       <a class="btn-one mt-2">START</a>
-      <%= link_to "Next lesson", user_lesson_path(@next_lesson) %>
+      <% if @user_lesson %>
+        <%= link_to "Next lesson", user_lesson_path(@user_lesson) %>
+      <% else %>
+        <p>All lessons finished</p>
+      <% end %>
     </div>
   </div>
 
