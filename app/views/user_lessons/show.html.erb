@@ -8,26 +8,14 @@
   <h2>User answer</h2>
   <div data-controller="hint">
     <%= simple_form_for @user_lesson do |f|  %>
-      <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}} %>
+      <code class="coda"><%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}, class: "coda"} %></code>
       <%= f.submit "Run", class: "btn btn-one"  %>
     <% end %>
     <button data-action="click->hint#sendFeedback">Feedback</button>
 
-<<<<<<< HEAD
-  <%= simple_form_for @user_lesson do |f|  %>
-    <code><%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!" %></code>
-    <%= f.submit "Run", class: "btn btn-one" %>
-  <% end %>
-
-  <h2>Feedback Response</h2>
-  <!-- Feedback response -->
-  <%= turbo_stream_from dom_id(@user_lesson) %>
-  <div id="ai_response"></div>
-=======
     <h2>Feedback Response</h2>
     <!-- Feedback response -->
     <%= render 'ai_response', content: @content %>
->>>>>>> e272bb298550eabbb0b90699cb839d0341e513c6
 
     <%= turbo_stream_from dom_id(@user_lesson) %>
   </div>
