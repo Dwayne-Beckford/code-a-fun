@@ -1,1 +1,17 @@
 // Specific CSS for your home-page
+.split-screen {
+  display: flex;
+  height: 100vh; /* Full screen height */
+}
+
+.left-side,
+.right-side {
+  flex: 1; /* Equal width */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.right-side img {
+  width: 40vw; /* 40% of viewport width */
+  height: auto;
+}
