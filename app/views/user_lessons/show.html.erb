@@ -17,14 +17,15 @@
   <!-- Feedback response -->
   <p data-hint-target="formOutput"><%= @content %></p>
 </div>
+  
+  <%= turbo_stream_from dom_id(@user_lesson) %>
+  <div id="ai_response"></div>
 
   <!-- Use of Bootstrap v5.3 is paramount in any case.-->
   <!-- Button trigger Concept modal -->
   <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#conceptModal">
     Concept
   </button>
-
-
 
   <!-- Concept modal -->
   <div class="modal fade" id="conceptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
