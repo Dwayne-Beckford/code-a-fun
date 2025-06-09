@@ -18,15 +18,16 @@ Here’s the lesson name:#{@user_lesson.lesson.name}
 Here’s the lesson description:#{@user_lesson.lesson.description}
 Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
 Here’s the lesson task:#{@user_lesson.lesson.task}
-Here’s the student answer:#{user_lesson.user_input}"}]
+Here’s the student answer:#{@user_lesson.user_input}"}]
     })
-    
+
      @content = chatgpt_response["choices"][0]["message"]["content"]
     puts @content
     respond_to do |format|
       format.json {
         render json: @content.to_json
       }
+    end
   end
 
   def update
@@ -40,14 +41,15 @@ Here’s the student answer:#{user_lesson.user_input}"}]
     if @user_lesson.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(:ai_response, partial: "user_lessons/ai_response",
-          locals: { ai_response: @user_lesson.ai_response })
+            render turbo_stream: turbo_stream.replace(:ai_response, partial: "user_lessons/ai_response",
+            locals: { content: @user_lesson.ai_response })
+          end
         end
-      end
     else
       render :show, status: :processable_entity
     end
   end
+
     # User input
   def userInput
     @questions = current_user.UserLesson
@@ -68,7 +70,7 @@ Here’s the student answer:#{user_lesson.user_input}"}]
     })
     chatgpt_response["choices"][0]["message"]["content"]
   end
- 
+
   # def user_lesson_params
     # params.require(:user_lesson).permit(:name, :number, :concept, :description, :level
     # end
@@ -76,4 +78,4 @@ Here’s the student answer:#{user_lesson.user_input}"}]
   def user_lesson_params
     params.require(:user_lesson).permit(:user_input)
   end
-
+end
