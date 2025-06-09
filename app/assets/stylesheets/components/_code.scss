@@ -1,0 +1,10 @@
+/* style.css */
+
+.coda {
+  background-color: #1F1F1F;
+  color: #FFFFFF;
+  &:focus {
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+  }
+}
