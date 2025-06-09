@@ -19,3 +19,15 @@
   width: 40vw; /* 40% of viewport width */
   height: auto;
 }
+
+// card
+
+.features-card {
+  overflow: hidden;
+  background: white;
+  border-radius: 20px;
+  border: 3px solid black;
+  padding: 2rem;
+  max-width: 100%;
+  box-shadow: 10px 10px 0px 0px $purple;
+}

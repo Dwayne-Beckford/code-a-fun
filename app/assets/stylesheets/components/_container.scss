@@ -4,6 +4,12 @@
   padding: 24px;
 };
 
+.container-small {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+};
+
 .lessons-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

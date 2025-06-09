@@ -3,7 +3,7 @@
 
   <div class="split-screen">
     <div class="left-side mt-5">
-      <h1 class="mt-5">Learn to code the fun way!</h1>
+      <h1 class="mt-5">Learn to Code the Fun Way!</h1>
       <p>Tried learning code and gave up? This time, you will get addicted to it!</p>
       <button class="btn-one">START LEARNING</button>
 
@@ -31,14 +31,50 @@
 
 <h2>How it Works</h2>
 
-<h3>Learn by doing</h3>
-<p>Master coding one bite-sized concept at a time—then put it into action instantly.</p>
+<div class="container-small">
 
-<h3>Get AI-powered feedback</h3>
-<p>Stuck? Our AI tutor’s got your back with hints, nudges, and aha-moments.</p>
+  <div class="features-card">
+    <div class="row align-items-center">
+      <!-- Image -->
+      <div class="col-md-3 text-end mb-3 mb-md-0">
+        <%= image_tag "bulb.png", class: "img-fluid", alt: "Feature image", style: "max-width: 100px;" %>
+      </div>
 
-<h3>Build your own games</h3>
-<p>Wrap up each level by building a real 2D game. See your skills come to life—literally.</p>
+      <!-- Text -->
+      <div class="col-md-9 text-start">
+        <h3 class="mb-3">Learn by doing</h3>
+        <p>Master coding one bite-sized concept at a time—then put it into action instantly.</p>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <!-- Image -->
+      <div class="col-md-3 text-end mb-3 mb-md-0">
+        <%= image_tag "bulb.png", class: "img-fluid", alt: "Feature image", style: "max-width: 100px;" %>
+      </div>
+
+      <!-- Text -->
+      <div class="col-md-9 text-start">
+        <h3 class="mb-3">Get AI-powered feedback</h3>
+        <p>Stuck? Our AI tutor’s got your back with hints, nudges, and aha-moments.</p>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <!-- Image -->
+      <div class="col-md-3 text-end mb-3 mb-md-0">
+        <%= image_tag "bulb.png", class: "img-fluid", alt: "Feature image", style: "max-width: 100px;" %>
+      </div>
+
+      <!-- Text -->
+      <div class="col-md-9 text-start">
+        <h3 class="mb-3">Build your own games</h3>
+        <p>Wrap up each level by building a real 2D game. See your skills come to life—literally.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 
 <h2>Results You Can Expect</h2>
@@ -46,21 +82,21 @@
 
   <div class="lessons-grid">
 
-    <div class="card-lesson">
+    <div class="card-level">
       <%= image_tag('game-3.gif') %>
       <div class="card-lesson-info">
         <h2>Gold Rush</h2>
       </div>
     </div>
 
-    <div class="card-lesson">
+    <div class="card-level">
       <%= image_tag('game-2.gif') %>
       <div class="card-lesson-info">
         <h2>Wack-A-Dot</h2>
       </div>
     </div>
 
-    <div class="card-lesson">
+    <div class="card-level">
       <%= image_tag('game-5.gif') %>
       <div class="card-lesson-info">
         <h2>Dodge the Comet</h2>
