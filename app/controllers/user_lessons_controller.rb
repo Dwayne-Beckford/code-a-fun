@@ -21,6 +21,7 @@ Here’s the lesson task:#{@user_lesson.lesson.task}
 Here’s the student answer: puts 'Hey Sam! Let’s grab some popcorn and code together!'"}]
     })
     @content = chatgpt_response["choices"][0]["message"]["content"]
+    puts @content
     respond_to do |format|
       format.json {
         render json: @content.to_json
