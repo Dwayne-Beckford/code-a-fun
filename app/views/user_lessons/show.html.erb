@@ -6,17 +6,20 @@
   <p><%= @user_lesson.lesson.task %></p>
 
   <h2>User answer</h2>
-
+<div data-controller="hint">
   <%= simple_form_for @user_lesson do |f|  %>
-    <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!" %>
-    <%= f.submit "Run", class: "btn btn-one" %>
+    <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}} %>
+    <%= f.submit "Run", class: "btn btn-one"  %>
   <% end %>
+  <button data-action="click->hint#sendFeedback">Feedback</button>
 
   <h2>Feedback Response</h2>
   <!-- Feedback response -->
+  <p data-hint-target="formOutput"><%= @content %></p>
+</div>
+  
   <%= turbo_stream_from dom_id(@user_lesson) %>
   <div id="ai_response"></div>
-
 
   <!-- Use of Bootstrap v5.3 is paramount in any case.-->
   <!-- Button trigger Concept modal -->
