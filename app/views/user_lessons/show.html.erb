@@ -8,8 +8,8 @@
   <h2>User answer</h2>
   <div data-controller="hint">
     <%= simple_form_for @user_lesson do |f|  %>
-      <code class="coda"><%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}, class: "coda"} %></code>
-      <%= f.submit "Run", class: "btn btn-one"  %>
+      <code class="coda"><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput"}, class: "coda"} %></code>
+      <%= f.submit "Run", class: "btn btn-one" %>
     <% end %>
     <button data-action="click->hint#sendFeedback">Feedback</button>
 
