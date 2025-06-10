@@ -69,12 +69,15 @@ class UserLessonsController < ApplicationController
     # elsif @user_lesson.lesson.number == 6
     #   new_points += 50
     end
-
   end
 
     # User input
   def userInput
     @questions = current_user.UserLesson
+  end
+
+  def completed
+     @completed_lessons = current_user.user_lessons.completed
   end
 
   private
