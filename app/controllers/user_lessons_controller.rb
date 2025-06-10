@@ -75,6 +75,10 @@ class UserLessonsController < ApplicationController
     # end
    end
 
+    def progess
+      @remaining_level = current_user.lesson.completed / current_user.lesson_id
+    end
+
     # User input
   def userInput
     @questions = current_user.UserLesson

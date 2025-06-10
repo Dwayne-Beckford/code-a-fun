@@ -23,7 +23,6 @@ class PagesController < ApplicationController
       @user_lesson = UserLesson.find_or_create_by!(user: current_user, lesson: @next_lesson)
     end
 
-
     # see all completed user levels
     @levels = current_user.user_levels.completed
   end
