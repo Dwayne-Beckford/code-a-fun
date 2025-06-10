@@ -61,13 +61,15 @@ class UserLessonsController < ApplicationController
 
     current_user.points = current_user.points + new_points
     current_user.save
-
-
   end
 
     # User input
   def userInput
     @questions = current_user.UserLesson
+  end
+
+  def completed
+     @completed_lessons = current_user.user_lessons.completed
   end
 
   private
