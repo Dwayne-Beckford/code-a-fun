@@ -49,10 +49,27 @@ class UserLessonsController < ApplicationController
     @correct = true
     end
 
-    # Save the response and display response
     if @user_lesson.save
+      # Adding points for completing a lesson
       new_points += 10 if @correct
       current_user.points += new_points
+
+      # Level logic
+      # Get current level from the lesson
+      current_level = @user_lesson.lesson.level
+
+      # Get all lessons in this level
+      lessons_in_level = Lesson.where(level: current_level).pluck(:id)
+
+      # Get completed lesson IDs for this user
+      completed_lesson_ids = current_user.user_lessons.completed.pluck(:lesson_id)
+
+      # If all lessons in this level are completed mark current level as completed
+      if lessons_in_level.all? { |id| completed_lesson_ids.include?(id) }
+        current_user_level = UserLevel.find_by(user: current_user, level: current_level)
+        current_user_level.update(completed: true) if current_user_level
+      end
+
       current_user.save
 
       respond_to do |format|
@@ -64,6 +81,7 @@ class UserLessonsController < ApplicationController
     else
       render :show, status: :unprocessable_entity
     end
+  end
 
     #if last_lesson(lesson.numer == 6), => increment points and direct user to congrats page
     # if @correct
@@ -73,7 +91,6 @@ class UserLessonsController < ApplicationController
     # # elsif @user_lesson.lesson.number == 6
     # #   new_points += 50
     # end
-   end
 
     # User input
   def userInput
