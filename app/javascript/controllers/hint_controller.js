@@ -10,7 +10,8 @@ export default class extends Controller {
   csrfToken() {
     return document.querySelector("meta[name='csrf-token']").content
   }
-  sendFeedback() {
+  sendFeedback(e) {
+    e.preventDefault()
     fetch(`${window.location.href}/feedbacks`, {
       method: "POST",
       headers: {"Accept": "application/json", 'X-CSRF-Token': this.csrfToken()},
@@ -22,5 +23,14 @@ export default class extends Controller {
       console.log(data)
       this.formOutputTarget.innerHTML = data
     })
+
+    this.formOutputTarget.innerHTML = `<div>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>We are crunching the numbers</p>
+    </div>`
+
+
   }
 }
