@@ -6,26 +6,27 @@
   <p><%= @user_lesson.lesson.task %></p>
 
   <h2>User answer</h2>
-<div data-controller="hint">
-  <%= simple_form_for @user_lesson do |f|  %>
-    <%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}} %>
-    <%= f.submit "Run", class: "btn btn-one"  %>
-  <% end %>
-  <button data-action="click->hint#sendFeedback">Feedback</button>
+  <div data-controller="hint">
+    <%= simple_form_for @user_lesson do |f|  %>
+      <code class="coda"><%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}, class: "coda"} %></code>
+      <%= f.submit "Run", class: "btn btn-one"  %>
+    <% end %>
+    <button data-action="click->hint#sendFeedback">Feedback</button>
 
-  <h2>Feedback Response</h2>
-  <!-- Feedback response -->
-  <p data-hint-target="formOutput"><%= @content %></p>
-</div>
-  
-  <%= turbo_stream_from dom_id(@user_lesson) %>
-  <div id="ai_response"></div>
+    <h2>Feedback Response</h2>
+    <!-- Feedback response -->
+    <%= render 'ai_response', content: @content %>
+
+    <%= turbo_stream_from dom_id(@user_lesson) %>
+  </div>
 
   <!-- Use of Bootstrap v5.3 is paramount in any case.-->
   <!-- Button trigger Concept modal -->
   <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#conceptModal">
     Concept
   </button>
+
+  <button type="button" class=""><%= link_to "dashboard", dashboard_path %></button>
 
   <!-- Concept modal -->
   <div class="modal fade" id="conceptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
