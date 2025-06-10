@@ -76,8 +76,10 @@ class UserLessonsController < ApplicationController
     @questions = current_user.UserLesson
   end
 
-  def completed
+  def lesson_completed
      @completed_lessons = current_user.user_lessons.completed
+      next_number = @completed_lessons.last.lesson.number + 1
+      @next_lesson = Lesson.find_by(number: next_number)
   end
 
   private
