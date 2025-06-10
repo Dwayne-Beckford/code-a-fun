@@ -11,7 +11,7 @@
     <div class="card-next-lesson-info">
       <h2><%= @next_lesson.name %></h2>
       <p><%= @next_lesson.description%></p>
-      
+
       <!--User next leeson-->
       <a class="btn-one mt-2">START</a>
       <% if @user_lesson %>
@@ -39,11 +39,23 @@
     <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
   <% end %>
 
-<h2 class="mt-5">Levels</h2>
-  <% @levels.each do | level| %>
-  <p><%= level.completed%></p>
-  <p><%= level.lesson.name %></p>
+  <%# <% @levels.each do | level| %>
+  <%# <p><%= level.completed%>
+  <%# <p><%= level.lesson.name %>
+  <%# <% end %>
+
+<h2 class="mt-4">Your Current Level</h2>
+<% if @current_level %>
+  <p><%= @current_level.level.name %></p>
+<% else %>
+  <p>You've completed all levels! 🎉</p>
+<% end %>
+
+<h2 class="mt-4">Completed Levels</h3>
+<ul>
+  <% @completed_levels.each do |user_level| %>
+    <li><%= user_level.level.name %></li>
   <% end %>
+</ul>
+
 </div>
-
-

@@ -8,24 +8,27 @@ class PagesController < ApplicationController
     # all completed user lessons
     @completed_lessons = current_user.user_lessons.completed
 
-    # see next lesson (safe even if user hasn't completed any)
+    # figure out next lesson
     if @completed_lessons.any?
       next_number = @completed_lessons.last.lesson.number + 1
       @next_lesson = Lesson.find_by(number: next_number)
-      if @next_lesson
-        @user_lesson = UserLesson.find_or_create_by!(user: current_user, lesson: @next_lesson)
-      else
-        @user_lesson = nil
-      end
     else
       @next_lesson = Lesson.find_by(number: 1)
-
-      @user_lesson = UserLesson.find_or_create_by!(user: current_user, lesson: @next_lesson)
     end
 
+    if @next_lesson
+      # Create User Lesson entry if it doesn't exist
+      @user_lesson = UserLesson.find_or_create_by!(user: current_user, lesson: @next_lesson)
+
+      # Create User Level entry if it doesn't exist
+      @user_level = UserLevel.find_or_create_by!(user: current_user, level: @next_lesson.level)
+    else
+      @user_lesson = nil
+    end
 
     # see all completed user levels
-    @levels = current_user.user_levels.completed
+    @levels = current_user.user_levels.includes(:level)
+    @completed_levels = @levels.select(&:completed)
+    @current_level = @levels.find { |user_level| !user_level.completed }
   end
-
 end

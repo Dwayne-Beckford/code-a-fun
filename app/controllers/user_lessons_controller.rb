@@ -64,10 +64,18 @@ class UserLessonsController < ApplicationController
       # Get completed lesson IDs for this user
       completed_lesson_ids = current_user.user_lessons.completed.pluck(:lesson_id)
 
-      # If all lessons in this level are completed mark current level as completed
-      if lessons_in_level.all? { |id| completed_lesson_ids.include?(id) }
-        current_user_level = UserLevel.find_by(user: current_user, level: current_level)
-        current_user_level.update(completed: true) if current_user_level
+      # Check if all lessons are completed
+      all_completed = lessons_in_level.all? do |lesson_id|
+        completed_lesson_ids.include?(lesson_id)
+      end
+
+      # If yes, mark level as completed
+      if all_completed
+        user_level = UserLevel.find_by(user: current_user, level: current_level)
+        if user_level
+          user_level.update(completed: true)
+          current_user.points += 40
+        end
       end
 
       current_user.save
