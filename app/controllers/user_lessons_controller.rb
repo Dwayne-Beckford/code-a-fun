@@ -6,6 +6,19 @@ class UserLessonsController < ApplicationController
 
   def show
     @user_lesson = UserLesson.find(params[:id])
+
+    # create all user_lessons unless they already exist
+    current_user.create_user_lessons_for_lesson(@user_lesson.lesson)
+
+    @completed_lessons = current_user.user_lessons.completed
+    next_number = @completed_lessons.last.lesson.number + 1
+    if next_number > 6
+      # next level
+    else
+      # next user_lesson
+      @next_lesson = Lesson.find_by(number: next_number)
+      @next_user_lesson = current_user.user_lessons.find_by(lesson: @next_lesson)
+    end
   end
 
   def feedback
@@ -45,8 +58,8 @@ class UserLessonsController < ApplicationController
 
     # Check for the word "correct" in ai response
     if @user_lesson.ai_response.downcase.include?("correct")
-    @user_lesson.completed = true
-    @correct = true
+      @user_lesson.completed = true
+      @correct = true
     end
 
     # Save the response and display response
@@ -65,6 +78,7 @@ class UserLessonsController < ApplicationController
       render :show, status: :unprocessable_entity
     end
 
+
     #if last_lesson(lesson.numer == 6), => increment points and direct user to congrats page
     # if @correct
     #   new_points += 10
@@ -80,10 +94,6 @@ class UserLessonsController < ApplicationController
     @questions = current_user.UserLesson
   end
 
-  def completed
-     @completed_lessons = current_user.user_lessons.completed
-  end
-
   private
   # AI check user input and returns response
   def validate_answer_with_ai(user_lesson)
@@ -91,11 +101,11 @@ class UserLessonsController < ApplicationController
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: "Check a student's coding input in Ruby. If the answer is 90% or more correct, just say 'Correct'. Otherwise, say 'You're not quite there. Press Test to get more hints'. Don't say anything else or rephrase. Stick to one of these exact sentences.
-Here’s the lesson name:#{@user_lesson.lesson.name}
-Here’s the lesson description:#{@user_lesson.lesson.description}
-Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
-Here’s the lesson task:#{@user_lesson.lesson.task}
-Here’s the student answer:#{user_lesson.user_input}"}]
+        Here’s the lesson name:#{@user_lesson.lesson.name}
+        Here’s the lesson description:#{@user_lesson.lesson.description}
+        Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
+        Here’s the lesson task:#{@user_lesson.lesson.task}
+        Here’s the student answer:#{user_lesson.user_input}"}]
     })
     chatgpt_response["choices"][0]["message"]["content"]
   end
