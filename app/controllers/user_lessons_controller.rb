@@ -6,6 +6,7 @@ class UserLessonsController < ApplicationController
 
   def show
     @user_lesson = UserLesson.find(params[:id])
+    UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
   end
 
   def feedback
@@ -75,6 +76,17 @@ class UserLessonsController < ApplicationController
         if user_level
           user_level.update(completed: true)
           current_user.points += 40
+          # 🎖️ Achievement based on level number
+          badge = case current_level.number
+          when 1 then "🥉"
+          when 2 then "🥈"
+          when 3 then "🥇"
+          when 4 then "🎖️"
+          when 5 then "🏆"
+          else "🏅"
+          end
+
+          Achievement.find_or_create_by!(user: current_user, name: badge)
         end
       end
 

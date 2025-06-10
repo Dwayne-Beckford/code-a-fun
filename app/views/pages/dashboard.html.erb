@@ -58,4 +58,22 @@
   <% end %>
 </ul>
 
+<h2 class="mt-4">Latest Achievement</h2>
+<% if @last_achievement %>
+  <p style="font-size: 2rem;"><%= @last_achievement.name %></p>
+<% else %>
+  <p>No achievements yet. Let’s earn your first one! 🎯</p>
+<% end %>
+
+<h2 class="mt-4">Your Recent Achievements</h2>
+<% if @recent_achievements.any? %>
+  <p style="font-size: 2rem;">
+    <% @recent_achievements.each do |achievement| %>
+      <span><%= achievement.name %></span>
+    <% end %>
+  </p>
+<% else %>
+  <p>No achievements yet. Let’s earn your first one! 🚀</p>
+<% end %>
+
 </div>

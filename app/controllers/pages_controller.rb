@@ -30,5 +30,11 @@ class PagesController < ApplicationController
     @levels = current_user.user_levels.includes(:level)
     @completed_levels = @levels.select(&:completed)
     @current_level = @levels.find { |user_level| !user_level.completed }
+
+    # see the last achievement
+    @last_achievement = current_user.achievements.order(created_at: :desc).first
+
+    # see the last 5 achievements
+    @recent_achievements = current_user.achievements.order(created_at: :desc).limit(5)
   end
 end
