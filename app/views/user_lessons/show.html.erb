@@ -59,3 +59,31 @@
     </div>
   </div>
 </div>
+
+<!--User lesson completion pop modal-->
+<!--Button trigger-->
+<button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#completionModal">
+    Completion
+  </button>
+<!-- modal-->
+ <div class="modal fade" id="completionModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="lessonCompleted"><%= @user_lesson %></h1>
+        </div>
+        <div class="modal-body">
+        <%= @user_lesson.completed %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-one" data-bs-dismiss="modal">Dashboard</button>
+           <button type="button" class="btn-one" data-bs-dismiss="modal">Next Lesson</button>
+           <%= link_to "Dashboard", dashboard_path %>
+           <%= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# The place to inject the script for showing the modal through turbo %>
+  <div id="modal-launch-target"></div>
+</div>

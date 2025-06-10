@@ -1,0 +1,12 @@
+<%# All turbo stream actions go here %>
+<%# The ai response feedback %>
+<%= turbo_stream.replace :ai_response, partial: "user_lessons/ai_response", locals: { content: @user_lesson.ai_response } %>
+<%# The modal pops up if the lesson is completed %>
+<% if @user_lesson.completed %>
+  <%= turbo_stream.append "modal-launch-target" do %>
+    <script>
+      const modal = new bootstrap.Modal(document.getElementById("completionModal"));
+      modal.show();
+    </script>
+  <% end %>
+<% end %>
