@@ -8,4 +8,10 @@ class User < ApplicationRecord
   has_many :levels, through: :user_levels
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def create_user_lessons_for_lesson(lesson)
+    Lesson.all.each do |lesson|
+      self.user_lessons.find_or_create_by!(lesson: lesson)
+    end
+  end
 end
