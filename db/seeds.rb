@@ -32,17 +32,17 @@ level_two = Level.create(number: 2, name: "Intermediate")
 puts "Creating Lesson 1"
 
 lesson_one = Lesson.create!(name: "Output & Variables", number: 1, concept: "Let’s break it down:
-  
+
 puts — This tells Ruby to say something. It prints to the screen.
 
 Variables — Think of these as little boxes where Ruby can store information. You can name your box (like name or age) and fill it with stuff (like 'Alex' or 27).
 
 📦 Example: name = 'Alex'
-puts 'Hello, \#{name}!', 
+puts 'Hello, \#{name}!',
 
 🧪 What’s happening? We store 'Alex' in the box called name. Then we ask Ruby to say 'Hello, Alex!' by using \#{name} — that’s called string interpolation (fancy term, easy trick).",
 
-description: "Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables. It’s like giving your computer a brain… and a voice.", 
+description: "Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables. It’s like giving your computer a brain… and a voice.",
 task: "Mission: Make Ruby Your Hype Buddy
 
 Write a short Ruby program that:
@@ -53,7 +53,7 @@ Stores your favorite snack in another variable.
 
 Uses puts to print a fun message like:  Hey Sam! Let's grab some popcorn and code together! 🚀
 
-💬 Use your own name and snack. Make it YOU. And add a fun emoji if you like!", answer: "'name = 'Ruby'
+💬 Use your own name and snack. Make it YOU.", answer: "'name = 'Ruby'
 snack = 'donuts'
 puts my buddy name is \#{name} and I like \#{snack}, level: level_one')",
 level: level_one
