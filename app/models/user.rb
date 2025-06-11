@@ -3,9 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :achievements
   has_many :user_lessons
-  has_many :user_levels 
   has_many :lessons, through: :user_lessons
-  has_many :levels, through: :user_levels
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,4 +12,23 @@ class User < ApplicationRecord
       self.user_lessons.find_or_create_by!(lesson: lesson)
     end
   end
+
+
+  def level_progress(level)
+    total_lessons_count = level.lessons.count
+    lesson_ids = level.lessons.pluck(:id)
+
+    completed_lessons_count = self.user_lessons.completed.where(lesson: lesson_ids).count
+
+    completed_lessons_count.to_f / total_lessons_count.to_f * 100
+  end
+
+  def completed_levels
+    levels_array = Level.all.select do |level|
+      level.completed_by_user?(self)
+    end
+
+    Level.where(id: levels_array.pluck(:id))
+  end
 end
+

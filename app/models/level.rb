@@ -1,5 +1,7 @@
 class Level < ApplicationRecord
     has_many :lessons
-    has_many :user_levels
-    has_many :users, through: :user_levels
+
+    def completed_by_user?(user)
+        lessons.all? { |lesson| user.user_lessons.completed.pluck(:lesson_id).include?(lesson.id) }
+    end
 end
