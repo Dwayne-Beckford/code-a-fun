@@ -8,17 +8,19 @@
       <%= simple_form_for @user_lesson do |f|  %>
         <code class="coda"><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput"}, class: "coda", rows:19, columns:2} %></code>
         <!-- Use of Bootstrap v5.3 is paramount in any case.-->
-        <!-- Button trigger Concept modal -->
-        <div class="butter">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
-          <button class="btn btn-one" data-action="click->hint#sendFeedback">Feedback</button>
-          <% if @next_user_lesson %>
-            <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
-          <% else %>
-            <%= link_to "Back to Dashboard", dashboard_path %>
-          <% end %>
-          <%= f.submit "Run", class: "btn btn-one" %>
-        </div>
+        <!-- Button for Concept modal -->
+          <div class="butter">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
+            <!-- Button Test -->
+            <button class="btn btn-one" data-action="click->hint#sendFeedback">Test</button>
+            <% if @next_user_lesson %>
+              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
+            <% else %>
+              <%= link_to "Back to Dashboard", dashboard_path %>
+            <% end %>
+            <!-- Form and button Run -->
+            <%= f.submit "Run", class: "btn btn-one" %>
+          </div>
       <% end %>
     </div>
   </div>
@@ -39,7 +41,8 @@
   </div>
 
   <!-- Concept modal -->
-  <div class="modal fade" id="conceptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal fade" id="conceptModal" data-controller="concept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -54,15 +57,10 @@
       </div>
     </div>
   </div>
+
 </div>
 
-<!--User lesson completion pop modal-->
-<!--Button trigger-->
-<%# <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#completionModal">
-    Completion
-  </button> %>
-
-<!-- modal-->
+<!-- Completion modal-->
  <div class="modal fade" id="completionModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
