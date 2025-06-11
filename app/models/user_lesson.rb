@@ -4,3 +4,4 @@ class UserLesson < ApplicationRecord
 
   scope :completed, -> { where(completed: true ) }
 end
+

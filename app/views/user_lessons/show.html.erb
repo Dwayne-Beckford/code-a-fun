@@ -1,32 +1,37 @@
 <!-- app/views/user_lessons/show.html.erb -->
-<div class="container">
-  <h1>User Lesson Page</h1>
-  <h2>The Task</h2>
-  <!-- Displaying lesson task -->
-  <p><%= @user_lesson.lesson.task %></p>
 
-  <h2>User answer</h2>
-  <div data-controller="hint">
-    <%= simple_form_for @user_lesson do |f|  %>
-      <code class="coda"><%= f.input :user_input, label: "Hey Sam! Let’s grab some popcorn and code together!", input_html: {data: {hint_target: "formInput"}, class: "coda"} %></code>
-      <%= f.submit "Run", class: "btn btn-one"  %>
-    <% end %>
-    <button data-action="click->hint#sendFeedback">Feedback</button>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/font-awesome.min.css">
+<div class="container" data-controller="hint">
+  <div class="split left">
+    <div class="top">
+      <!-- <h2>User answer</h2> -->
+      <%= simple_form_for @user_lesson do |f|  %>
+        <code class="coda"><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput"}, class: "coda", rows:19, columns:2} %></code>
+        <!-- Use of Bootstrap v5.3 is paramount in any case.-->
+        <!-- Button trigger Concept modal -->
+        <div class="butter">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
+          <button class="btn btn-one" data-action="click->hint#sendFeedback">Feedback</button>
 
-    <h2>Feedback Response</h2>
-    <!-- Feedback response -->
-    <%= render 'ai_response', content: @content %>
-
-    <%= turbo_stream_from dom_id(@user_lesson) %>
+          <%= f.submit "Run", class: "btn btn-one" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+  <div class="split right">
+    <div class="top">
+      <h2>The Task</h2>
+      <!-- Displaying lesson task -->
+      <p><%= @user_lesson.lesson.task %></p>
+    </div>
+    <div class = "bottom">
+      <h2>Feedback Response</h2>
+      <!-- Feedback response -->
+      <%= render 'ai_response', content: @content %>
 
-  <!-- Use of Bootstrap v5.3 is paramount in any case.-->
-  <!-- Button trigger Concept modal -->
-  <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#conceptModal">
-    Concept
-  </button>
-
-  <button type="button" class=""><%= link_to "dashboard", dashboard_path %></button>
+      <%= turbo_stream_from dom_id(@user_lesson) %>
+    </div>
+  </div>
 
   <!-- Concept modal -->
   <div class="modal fade" id="conceptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,28 +53,36 @@
 
 <!--User lesson completion pop modal-->
 <!--Button trigger-->
-<button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#completionModal">
+<%# <button type="button" class="btn-one" data-bs-toggle="modal" data-bs-target="#completionModal">
     Completion
-  </button>
+  </button> %>
+
 <!-- modal-->
  <div class="modal fade" id="completionModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="lessonCompleted"><%= @user_lesson %></h1>
+          <h1 class="modal-title fs-5" id="lessonCompleted">Congratulations!</h1>
         </div>
         <div class="modal-body">
-        <%= @user_lesson.completed %>
+          <% if @user_lesson.lesson.number < 6 %>
+            You've completed this lesson! Would you like to continue to the next one?
+          <% else %>
+            That was all! You're done! Go back to your dashboard
+          <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-one" data-bs-dismiss="modal">Dashboard</button>
            <button type="button" class="btn-one" data-bs-dismiss="modal">Next Lesson</button>
            <%= link_to "Dashboard", dashboard_path %>
-           <%= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
+           
+           <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
+          <%= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
         </div>
       </div>
     </div>
   </div>
-  <%# The place to inject the script for showing the modal through turbo %>
-  <div id="modal-launch-target"></div>
 </div>
+
+<%# The place to inject the script for showing the modal through turbo %>
+<div id="modal-launch-target"></div>
