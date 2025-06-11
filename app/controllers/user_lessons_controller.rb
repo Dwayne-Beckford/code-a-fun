@@ -78,35 +78,37 @@ class UserLessonsController < ApplicationController
 
       # Get all lessons in this level
       lessons_in_level = Lesson.where(level: current_level).pluck(:id)
+      level_lesson = lessons_in_level.count
 
       # Get completed lesson IDs for this user
       completed_lesson_ids = current_user.user_lessons.completed.pluck(:lesson_id)
+      lesson_completed = completed_lesson_ids.count
 
       # Check if all lessons are completed
       all_completed = lessons_in_level.all? do |lesson_id|
         completed_lesson_ids.include?(lesson_id)
       end
 
+      
       # If yes, mark level as completed
       if all_completed
-        user_level = UserLevel.find_by(user: current_user, level: current_level)
-        if user_level
-          user_level.update(completed: true)
-          current_user.points += 40
-          # 🎖️ Achievement based on level number
-          badge = case current_level.number
-          when 1 then "🥉"
-          when 2 then "🥈"
-          when 3 then "🥇"
-          when 4 then "🎖️"
-          when 5 then "🏆"
-          else "🏅"
-          end
-
-          Achievement.find_or_create_by!(user: current_user, name: badge)
+        current_user.points += 40
+        # 🎖️ Achievement based on level number
+        badge = case current_level.number
+        when 1 then "🥉"
+        when 2 then "🥈"
+        when 3 then "🥇"
+        when 4 then "🎖️"
+        when 5 then "🏆"
+        else "🏅"
         end
+        
+        Achievement.find_or_create_by!(user: current_user, name: badge)
       end
-
+      
+      # adding progress to the progress bar
+      @progress_add = lesson_completed.to_f / level_lesson.to_f
+      
       current_user.save
 
       respond_to do |format|
@@ -129,10 +131,6 @@ class UserLessonsController < ApplicationController
     # # elsif @user_lesson.lesson.number == 6
     # #   new_points += 50
     # end
-
-    def progess
-      @remaining_level = current_user.lesson.completed / current_user.lesson_id
-    end
 
     # User input
   def userInput

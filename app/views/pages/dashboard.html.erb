@@ -3,8 +3,8 @@
 <%= current_user.points%>
 <%= current_user.name %>
 <!--Progress bar-->
-<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar" style="width: 25%"><%= @remaining %></div>
+<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %></div>
   
 </div>
   <h1 class="mt-2">Dashboard</h1>
@@ -50,15 +50,15 @@
 
 <h2 class="mt-4">Your Current Level</h2>
 <% if @current_level %>
-  <p><%= @current_level.level.name %></p>
+  <p><%= @current_level.name %></p>
 <% else %>
   <p>You've completed all levels! 🎉</p>
 <% end %>
 
 <h2 class="mt-4">Completed Levels</h3>
 <ul>
-  <% @completed_levels.each do |user_level| %>
-    <li><%= user_level.level.name %></li>
+  <% @levels.each do |level| %>
+    <li><%= level.name %></li>
   <% end %>
 </ul>
 

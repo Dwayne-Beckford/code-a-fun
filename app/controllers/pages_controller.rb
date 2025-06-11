@@ -22,14 +22,16 @@ class PagesController < ApplicationController
     end
 
     # see all completed user levels
-    @levels = current_user.user_levels.includes(:level)
-    @completed_levels = @levels.select(&:completed)
-    @current_level = @levels.find { |user_level| !user_level.completed }
+    @levels = current_user.completed_levels
+
+    @current_level = current_user.user_lessons.where(completed: false).last.lesson.level
 
     # see the last achievement
     @last_achievement = current_user.achievements.order(created_at: :desc).first
 
     # see the last 5 achievements
     @recent_achievements = current_user.achievements.order(created_at: :desc).limit(5)
+
+    @progress = current_user.level_progress(@current_level)
   end
 end
