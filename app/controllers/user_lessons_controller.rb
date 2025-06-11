@@ -6,19 +6,7 @@ class UserLessonsController < ApplicationController
 
   def show
     @user_lesson = UserLesson.find(params[:id])
-
-    # create all user_lessons unless they already exist
-    current_user.create_user_lessons_for_lesson(@user_lesson.lesson)
-
-    @completed_lessons = current_user.user_lessons.completed
-    next_number = @completed_lessons.last.lesson.number + 1
-    if next_number > 6
-      # next level
-    else
-      # next user_lesson
-      @next_lesson = Lesson.find_by(number: next_number)
-      @next_user_lesson = current_user.user_lessons.find_by(lesson: @next_lesson)
-    end
+    UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
   end
 
   def feedback
@@ -62,10 +50,46 @@ class UserLessonsController < ApplicationController
       @correct = true
     end
 
-    # Save the response and display response
     if @user_lesson.save
+      # Adding points for completing a lesson
       new_points += 10 if @correct
       current_user.points += new_points
+
+      # Level logic
+      # Get current level from the lesson
+      current_level = @user_lesson.lesson.level
+
+      # Get all lessons in this level
+      lessons_in_level = Lesson.where(level: current_level).pluck(:id)
+
+      # Get completed lesson IDs for this user
+      completed_lesson_ids = current_user.user_lessons.completed.pluck(:lesson_id)
+
+      # Check if all lessons are completed
+      all_completed = lessons_in_level.all? do |lesson_id|
+        completed_lesson_ids.include?(lesson_id)
+      end
+
+      # If yes, mark level as completed
+      if all_completed
+        user_level = UserLevel.find_by(user: current_user, level: current_level)
+        if user_level
+          user_level.update(completed: true)
+          current_user.points += 40
+          # 🎖️ Achievement based on level number
+          badge = case current_level.number
+          when 1 then "🥉"
+          when 2 then "🥈"
+          when 3 then "🥇"
+          when 4 then "🎖️"
+          when 5 then "🏆"
+          else "🏅"
+          end
+
+          Achievement.find_or_create_by!(user: current_user, name: badge)
+        end
+      end
+
       current_user.save
 
       respond_to do |format|
@@ -77,6 +101,7 @@ class UserLessonsController < ApplicationController
     else
       render :show, status: :unprocessable_entity
     end
+  end
 
 
     #if last_lesson(lesson.numer == 6), => increment points and direct user to congrats page
@@ -87,7 +112,6 @@ class UserLessonsController < ApplicationController
     # # elsif @user_lesson.lesson.number == 6
     # #   new_points += 50
     # end
-   end
 
     # User input
   def userInput
