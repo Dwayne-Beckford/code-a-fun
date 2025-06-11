@@ -21,13 +21,14 @@ User.destroy_all
 # 2. Creating
 
 puts "Creating user Dave"
-dave = User.create(email:"dave@test.com", password: "123456", name: "Dave", points: 50)
+david = User.create(email:"david@test.com", password: "123456", name: "David", points: 40)
 jane = User.create(email:"jane@test.com", password: "123456", name: "Jane", points: 30)
-larry = User.create(email:"larry@test.com", password: "123456", name: "Larry", points: 0)
+diana = User.create(email:"diana@test.com", password: "123456", name: "Diana", points: 0)
 
 puts "Creating Level Basics"
-level_one = Level.create(number: 1, name: "Game 1")
-level_two = Level.create(number: 2, name: "Game 2")
+level_one = Level.create(number: 1, name: "Basics")
+level_two = Level.create(number: 2, name: "Dodge the Meteor")
+level_three = Level.create(number: 3, name: "Snake")
 
 puts "Creating Lesson 1"
 
@@ -53,45 +54,130 @@ Stores your favorite snack in another variable.
 
 Uses puts to print a fun message like:  Hey Sam! Let's grab some popcorn and code together! 🚀
 
-💬 Use your own name and snack. Make it YOU.", answer: "'name = 'Ruby'
-snack = 'donuts'
-puts my buddy name is \#{name} and I like \#{snack}, level: level_one')",
-level: level_one
-)
+💬 Use your own name and snack. Make it YOU.", level: level_one)
 
-puts "Creating Lesson 2 in Level 2"
+puts "Creating Lesson 2 in Level 1"
 
-lesson_two = Lesson.create(name: "Classes", number: 2, concept: "In object-oriented programming, a class defines the shared aspects of objects created from the class. The capabilities of a class differ between programming languages, but generally the shared aspects consist of state (variables) and behavior (methods) that are each either associated with a particular object or with all objects of that class.", description: "In this lesson you'll learn everything about classes: what they are, how to write them and more.", task: "Create a class for animals", answer: "rails g" , level: level_one)
+lesson_two = Lesson.create(name: "Classes", number: 2, concept: "In object-oriented programming, a class defines the shared aspects of objects created from the class. The capabilities of a class differ between programming languages, but generally the shared aspects consist of state (variables) and behavior (methods) that are each either associated with a particular object or with all objects of that class.", description: "In this lesson you'll learn everything about classes: what they are, how to write them and more.", task: "Create a class for animals", level: level_one)
 
-puts "Creating Lesson 3"
+puts "Creating Lesson 3 in Level 2"
 lesson_three = Lesson.create(name: "Conditional Logic", number: 3, concept: "Conditional logic, also known as conditional statements or conditionals, is a fundamental programming concept that allows a program to make decisions and execute different code blocks based on whether specific conditions are true or false. This enables programs to adapt to user input and varying situations, providing more complex and flexible functionality.", description: "In this lesson you'll learn everything about if statements: what they are, how to write them and more.", task: "Create an if for an voting age checker", answer: 'if age > 18 puts you cant vote', level: level_two)
 
-puts "Creating Lesson 4"
+puts "Creating Lesson 4 in Level 2"
 lesson_four = Lesson.create(name: "Database", number: 4, concept: "Database programming involves using specific languages and techniques to interact with and manage databases, enabling them to store, retrieve, and manipulate data. It's crucial for various applications, from self-driving cars to package tracking systems.", description: "In this lesson you'll learn everything about db: what they are, how to write them and more.", task: "Create a db for a hospitals", answer: "rails g",  level: level_two)
 
-puts "Creating Lesson 5"
-lesson_five = Lesson.create(name: "Hashes", number: 5, concept: "Hashing in programming involves using a mathematical algorithm (a hash function) to convert data into a fixed-length value, often called a hash code or hash value. This process is used in various applications, including data storage and retrieval, security measures like password storage, and digital signatures.", description: "In this lesson you'll learn everything about hashes: what they are, how to write them and more.", task: "Create a hash for movies", answer: 'eaxmple = {"key"=> "value"}', level: level_two)
+puts "Creating Lesson 5 in Level 2 (Game)"
+lesson_six = Lesson.create(name: "Build Dodge the Meteor!", number: 5, concept: "Collision detection + player movement. Let's combine everything you've learnt to build a game where meteors fall from the sky and your spaceship needs to avoid collision, or else it's Game Over!", description: "The sky’s falling! In this mini-game, you’ll control a character that must dodge incoming meteors. You’ll combine keyboard controls with basic collision logic to keep the player alive as long as possible.", task: "Build a 2D game where the player moves left and right to dodge falling meteors.
+Your game should:
+	•	Let the player move smoothly with arrow keys
+	•	Spawn meteors that fall from the top
+	•	Detect when a meteor hits the player (and end the game)
+	•	Keep score based on how long the player survives", answer: "require 'ruby2d'
 
-puts "Creating Lesson 6"
-lesson_six = Lesson.create(name: "Loops", number: 6, concept: "In programming, a loop is a control flow statement that allows a section of code to be executed repeatedly until a specific condition is met or until a certain number of iterations have been completed. Loops are essential for performing repetitive tasks efficiently and can significantly improve program efficiency by reducing redundancy and simplifying complex processes.", description: "In this lesson you'll learn everything about loops: what they are, how to write them and more.", answer: "while", task: "Create a loop for a countdown", level: level_two)
+set title: 'Avoid the Meteor!', width: 400, height: 300
+
+# Settings
+PLAYER_SPEED = 5
+BOMB_SPEED = 2
+GAME_DURATION = 30  # seconds
+
+@game_over = false
+@x_direction = 0
+@start_time = Time.now
+
+# Player
+@player = Square.new(
+  x: 180, y: 260, size: 30,
+  color: 'blue'
+)
+
+# Bombs (start off screen at random x positions)
+@bombs = Array.new(7) do
+  Square.new(
+    x: rand(0..370), y: rand(-300..-20), size: 20,
+    color: 'red'
+  )
+end
+
+# Timer text
+@timer_text = Text.new('Time: 0', x: 10, y: 10, size: 18)
+@message = nil
+
+# Controls
+on :key_down do |event|
+  if event.key == 'left'
+    @x_direction = -1
+  elsif event.key == 'right'
+    @x_direction = 1
+  end
+end
+
+on :key_up do |event|
+  if ['left', 'right'].include?(event.key)
+    @x_direction = 0
+  end
+end
+
+# Game loop
+update do
+  next if @game_over
+
+  # Update timer
+  elapsed = Time.now - @start_time
+  @timer_text.text = 'Time: \#{elapsed.round}'
+
+  if elapsed >= GAME_DURATION
+    @message = Text.new('You Win!', x: 140, y: 140, size: 24)
+    @game_over = true
+  end
+
+  /# Move player
+  @player.x += @x_direction * PLAYER_SPEED
+  @player.x = [[@player.x, 0].max, Window.width - @player.size].min
+
+  /# Move bombs
+  @bombs.each do |bomb|
+    bomb.y += BOMB_SPEED
+
+    /# Reset bomb if it goes off screen
+    if bomb.y > Window.height
+      bomb.y = rand(-200..-20)
+      bomb.x = rand(0..380)
+    end
+
+    /# Collision check
+    if bomb.y + bomb.size >= @player.y &&
+       bomb.x + bomb.size >= @player.x &&
+       bomb.x <= @player.x + @player.size
+
+      @message = Text.new('Game Over!', x: 130, y: 140, size: 24)
+      @game_over = true
+    end
+  end
+end
+
+show", level: level_two)
+
+puts "Creating Lesson 6 in Level 1"
+lesson_five = Lesson.create(name: "Hashes", number: 6, concept: "Hashing in programming involves using a mathematical algorithm (a hash function) to convert data into a fixed-length value, often called a hash code or hash value. This process is used in various applications, including data storage and retrieval, security measures like password storage, and digital signatures.", description: "In this lesson you'll learn everything about hashes: what they are, how to write them and more.", task: "Create a hash for movies", answer: 'eaxmple = {"key"=> "value"}', level: level_three)
 
 puts "Creating user levels"
-daves_last_level = UserLevel.create(completed: false, user: dave, level: level_one)
+davids_last_level = UserLevel.create(completed: true, user: david, level: level_one)
 janes_last_level = UserLevel.create(completed: false, user: jane, level: level_one)
 
-puts "Creating Dave's progress"
+puts "Creating David's progress"
 # Marks multiple lessons as complete (from 1 to 5)
-[lesson_one, lesson_two, lesson_three, lesson_four, lesson_five].each do |lesson|
-  UserLesson.create(completed: true, user: dave, lesson: lesson)
+[lesson_one, lesson_two, lesson_three, lesson_four].each do |lesson|
+  UserLesson.create(completed: true, user: david, lesson: lesson)
 end
 
 puts "Creating Jane's progress"
-[lesson_one, lesson_two, lesson_three, lesson_four].each do |lesson|
+[lesson_one, lesson_two, lesson_three].each do |lesson|
   UserLesson.create(completed: true, user: jane, lesson: lesson)
 end
 
 puts "Creating Dave's achievements"
-daves_achievement = Achievement.create(user: dave, name: "Gold Medal")
+davids_achievement = Achievement.create(user: david, name: "🏆")
 
 puts "Creating Jane's achievements"
 janes_achievement = Achievement.create(user: jane, name: "Silver Medal")
