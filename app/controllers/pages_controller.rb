@@ -19,11 +19,6 @@ class PagesController < ApplicationController
     if @next_lesson
       # Create User Lesson entry if it doesn't exist
       @user_lesson = UserLesson.find_or_create_by!(user: current_user, lesson: @next_lesson)
-
-      # Create User Level entry if it doesn't exist
-      @user_level = UserLevel.find_or_create_by!(user: current_user, level: @next_lesson.level)
-    else
-      @user_lesson = nil
     end
 
     # see all completed user levels
