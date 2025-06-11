@@ -6,7 +6,24 @@ class UserLessonsController < ApplicationController
 
   def show
     @user_lesson = UserLesson.find(params[:id])
-    UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
+    # UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
+
+    @next_lesson_number = @user_lesson.lesson.number + 1
+    @next_level_number = @user_lesson.lesson.level.number + 1
+
+    @next_lesson = Lesson.find_by(number: @next_lesson_number)
+
+    if @next_lesson.present?
+      @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
+    else
+      # level complete, go to next level
+      @next_level = Level.find_by(number: @next_level_number)
+      @next_lesson = Lesson.find_by(number: 1, level: @next_level)
+      if @next_lesson
+        @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
+      end
+      # else there is no more next_user_lesson
+    end
   end
 
   def feedback
