@@ -12,7 +12,11 @@
         <div class="butter">
           <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
           <button class="btn btn-one" data-action="click->hint#sendFeedback">Feedback</button>
-
+          <% if @next_user_lesson %>
+            <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
+          <% else %>
+            <%= link_to "Back to Dashboard", dashboard_path %>
+          <% end %>
           <%= f.submit "Run", class: "btn btn-one" %>
         </div>
       <% end %>
@@ -21,6 +25,7 @@
   <div class="split right">
     <div class="top">
       <h2>The Task</h2>
+      <p>current level: <%= @user_lesson.lesson.level.number %></p>
       <!-- Displaying lesson task -->
       <p><%= @user_lesson.lesson.task %></p>
     </div>
@@ -73,11 +78,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-one" data-bs-dismiss="modal">Dashboard</button>
-           <button type="button" class="btn-one" data-bs-dismiss="modal">Next Lesson</button>
-           <%= link_to "Dashboard", dashboard_path %>
-           
-           <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
-          <%= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
+            <button type="button" class="btn-one" data-bs-dismiss="modal">Next Lesson</button>
+            <%= link_to "Dashboard", dashboard_path %>
+            <% if @next_user_lesson %>
+              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
+            <% else %>
+              <%= link_to "Back to Dashboard", dashboard_path %>
+            <% end %>
+          <%#= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
         </div>
       </div>
     </div>
