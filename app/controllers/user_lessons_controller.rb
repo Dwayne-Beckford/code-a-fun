@@ -6,6 +6,24 @@ class UserLessonsController < ApplicationController
 
   def show
     @user_lesson = UserLesson.find(params[:id])
+    # UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
+
+    @next_lesson_number = @user_lesson.lesson.number + 1
+    @next_level_number = @user_lesson.lesson.level.number + 1
+
+    @next_lesson = Lesson.find_by(number: @next_lesson_number)
+
+    if @next_lesson.present?
+      @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
+    else
+      # level complete, go to next level
+      @next_level = Level.find_by(number: @next_level_number)
+      @next_lesson = Lesson.find_by(number: 1, level: @next_level)
+      if @next_lesson
+        @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
+      end
+      # else there is no more next_user_lesson
+    end
   end
 
   def feedback
@@ -45,14 +63,50 @@ class UserLessonsController < ApplicationController
 
     # Check for the word "correct" in ai response
     if @user_lesson.ai_response.downcase.include?("correct")
-    @user_lesson.completed = true
-    @correct = true
+      @user_lesson.completed = true
+      @correct = true
     end
 
-    # Save the response and display response
     if @user_lesson.save
+      # Adding points for completing a lesson
       new_points += 10 if @correct
       current_user.points += new_points
+
+      # Level logic
+      # Get current level from the lesson
+      current_level = @user_lesson.lesson.level
+
+      # Get all lessons in this level
+      lessons_in_level = Lesson.where(level: current_level).pluck(:id)
+
+      # Get completed lesson IDs for this user
+      completed_lesson_ids = current_user.user_lessons.completed.pluck(:lesson_id)
+
+      # Check if all lessons are completed
+      all_completed = lessons_in_level.all? do |lesson_id|
+        completed_lesson_ids.include?(lesson_id)
+      end
+
+      # If yes, mark level as completed
+      if all_completed
+        user_level = UserLevel.find_by(user: current_user, level: current_level)
+        if user_level
+          user_level.update(completed: true)
+          current_user.points += 40
+          # 🎖️ Achievement based on level number
+          badge = case current_level.number
+          when 1 then "🥉"
+          when 2 then "🥈"
+          when 3 then "🥇"
+          when 4 then "🎖️"
+          when 5 then "🏆"
+          else "🏅"
+          end
+
+          Achievement.find_or_create_by!(user: current_user, name: badge)
+        end
+      end
+
       current_user.save
 
       respond_to do |format|
@@ -64,6 +118,8 @@ class UserLessonsController < ApplicationController
     else
       render :show, status: :unprocessable_entity
     end
+  end
+
 
     #if last_lesson(lesson.numer == 6), => increment points and direct user to congrats page
     # if @correct
@@ -73,7 +129,6 @@ class UserLessonsController < ApplicationController
     # # elsif @user_lesson.lesson.number == 6
     # #   new_points += 50
     # end
-   end
 
     def progess
       @remaining_level = current_user.lesson.completed / current_user.lesson_id
@@ -84,10 +139,6 @@ class UserLessonsController < ApplicationController
     @questions = current_user.UserLesson
   end
 
-  def completed
-     @completed_lessons = current_user.user_lessons.completed
-  end
-
   private
   # AI check user input and returns response
   def validate_answer_with_ai(user_lesson)
@@ -95,11 +146,11 @@ class UserLessonsController < ApplicationController
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: "Check a student's coding input in Ruby. If the answer is 90% or more correct, just say 'Correct'. Otherwise, say 'You're not quite there. Press Test to get more hints'. Don't say anything else or rephrase. Stick to one of these exact sentences.
-Here’s the lesson name:#{@user_lesson.lesson.name}
-Here’s the lesson description:#{@user_lesson.lesson.description}
-Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
-Here’s the lesson task:#{@user_lesson.lesson.task}
-Here’s the student answer:#{user_lesson.user_input}"}]
+        Here’s the lesson name:#{@user_lesson.lesson.name}
+        Here’s the lesson description:#{@user_lesson.lesson.description}
+        Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
+        Here’s the lesson task:#{@user_lesson.lesson.task}
+        Here’s the student answer:#{user_lesson.user_input}"}]
     })
     chatgpt_response["choices"][0]["message"]["content"]
   end
