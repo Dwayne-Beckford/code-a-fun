@@ -10,7 +10,7 @@
           <pre aria-hidden="true" class="highlighted-code">
             <code class="language-ruby highlighted-code" data-highlight-target="highlight"></code>
           </pre>
-          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2, placeholder: 'Write your code here'}, input_html_classes: [] %>
+          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2, placeholder: '# Write your code here'}, input_html_classes: [] %>
         </div>
 
         <!-- Use of Bootstrap v5.3 is paramount in any case.-->
@@ -87,6 +87,7 @@
             <p>You've won <strong>10 points</strong> by completing this lesson!👏</p>
           <% end %>
         </div>
+
         <div class="modal-footer justify-content-center">
             <%= link_to "Dashboard", dashboard_path, class: "btn-second" %>
             <% if @next_user_lesson %>

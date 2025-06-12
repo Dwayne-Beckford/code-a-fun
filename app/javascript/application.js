@@ -3,3 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+
+document.addEventListener("turbo:load", () => {
+  console.log("Turbo load detected. Highlighting...")
+  Prism.highlightAll()
+})

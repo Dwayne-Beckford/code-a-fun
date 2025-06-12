@@ -2,11 +2,11 @@
 <div class="container-dashboard">
 
 <!--Greeting line-->
-<h2 class="mt-5">Hi <%= current_user.name %>, you're just <%= @uncompleted_in_current_level_count %> lessons away from build the <%= @current_level.name %> game. Let’s go!</h1>
+<h2 class="mt-5">Hi, <%= current_user.name %>, you're just <%= @uncompleted_in_current_level_count %> lessons away from completing <%= @current_level.name %>. Let’s go!</h1>
 
 <!--Progress bar-->
-<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %>%</div>
+<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress.round %>" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar custom-purple" style="width: <%= @progress.round %>%"><%= @progress.round %>%</div>
 </div>
 
 <h2 class="mt-5 text-center">Next Lesson</h2>
@@ -34,7 +34,11 @@
   <!--Past Lessons Cards-->
   <% @completed_lessons.each do |user_lesson| %>
   <div class="card-lesson">
-    <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+    <% if user_lesson.lesson.photo.attached? %>
+      <%= cl_image_tag user_lesson.lesson.photo.key %>
+    <% else %>
+      <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+    <% end %>
     <div class="card-lesson-info">
       <h2><%= link_to user_lesson.lesson.name, user_lesson_path(user_lesson) %></h2>
       <p><%= user_lesson.lesson.description %></p>
