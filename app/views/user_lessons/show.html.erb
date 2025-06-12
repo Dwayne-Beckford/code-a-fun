@@ -21,6 +21,14 @@
     </div>
   </div>
   <div class="split right">
+
+    <div class="icon-container">
+      <%= link_to dashboard_path, style: 'color: black;' do %>
+        <i class="fa-solid fa-xmark fa-3x"></i>
+        <% end %>
+    </div>
+
+
     <div class="top">
       <h2>The Task</h2>
       <p>current level: <%= @user_lesson.lesson.level.number %></p>
