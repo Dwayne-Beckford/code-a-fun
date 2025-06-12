@@ -1,48 +1,46 @@
 <%= render "shared/navbar-user" %>
-<div class="container">
+<div class="container-dashboard">
 
 <!--Greeting line-->
-<h2>Hi <%= current_user.name %>, in just X lessons, you’ll be able to build <%= @current_level.name %> from scratch. Let’s go!</h1>
+<h2 class="mt-5">Hi <%= current_user.name %>, just <%= @uncompleted_in_current_level_count %> lessons until <%= @current_level.name %> game. Let’s go!</h1>
 
 <!--Progress bar-->
 <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %></div>
-
+  <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %>%</div>
 </div>
 
-  <!--Next Lesson-->
-  <h2 class="mt-2">Next Lesson</h2>
-  <div class="card-next-lesson">
-    <%= image_tag('seed/Classes.png', alt: 'Classes') %>
-    <div class="card-next-lesson-info">
-      <h2><%= @next_lesson.name %></h2>
-      <p><%= @next_lesson.description%></p>
-      <a class="btn-one mt-2">START</a>
-      <% if @user_lesson %>
-        <%= link_to "Next lesson", user_lesson_path(@user_lesson) %>
-      <% else %>
-        <p>All lessons finished</p>
-      <% end %>
-    </div>
-  </div>
-
-  <!--Past Lessons-->
-  <h2 class="mt-5">Want to Refresh Your Memory?</h2>
-  <% if @completed_lessons.any? %>
-  <div class="lessons-grid">
-    <% @completed_lessons.each do |user_lesson| %>
-    <div class="card-lesson">
-      <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
-      <div class="card-lesson-info">
-        <h2><%= link_to user_lesson.lesson.name, user_lesson_path(user_lesson) %></h2>
-        <p><%= user_lesson.lesson.description %></p>
-      </div>
-    </div>
+<!--Next Lesson-->
+<h2 class="mt-5 text-center">Next Lesson</h2>
+<div class="card-next-lesson">
+  <%= image_tag('seed/Classes.png', alt: 'Classes') %>
+  <div class="card-next-lesson-info">
+    <h2><%= @next_lesson.name %></h2>
+    <p class="mb-4"><%= @next_lesson.description%></p>
+    <% if @user_lesson %>
+      <%= link_to "START", user_lesson_path(@user_lesson), class: "btn-one" %>
+    <% else %>
+      <p>All lessons finished</p>
     <% end %>
   </div>
-  <% else %>
-    <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
+</div>
+
+<!--Past Lessons-->
+<h2 class="mt-5 text-center">Want to Refresh Your Memory?</h2>
+<% if @completed_lessons.any? %>
+<div class="lessons-grid">
+  <% @completed_lessons.each do |user_lesson| %>
+  <div class="card-lesson">
+    <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+    <div class="card-lesson-info">
+      <h2><%= link_to user_lesson.lesson.name, user_lesson_path(user_lesson) %></h2>
+      <p><%= user_lesson.lesson.description %></p>
+    </div>
+  </div>
   <% end %>
+</div>
+<% else %>
+  <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
+<% end %>
 
 <!--Remove when done-->
 <h2 class="mt-4">Completed Levels</h3>
@@ -51,23 +49,5 @@
     <li><%= level.name %></li>
   <% end %>
 </ul>
-
-<h2 class="mt-4">Latest Achievement</h2>
-<% if @last_achievement %>
-  <p style="font-size: 2rem;"><%= @last_achievement.name %></p>
-<% else %>
-  <p>No achievements yet. Let’s earn your first one! 🎯</p>
-<% end %>
-
-<h2 class="mt-4">Your Recent Achievements</h2>
-<% if @recent_achievements.any? %>
-  <p style="font-size: 2rem;">
-    <% @recent_achievements.each do |achievement| %>
-      <span><%= achievement.name %></span>
-    <% end %>
-  </p>
-<% else %>
-  <p>No achievements yet. Let’s earn your first one! 🚀</p>
-<% end %>
 
 </div>
