@@ -1,5 +1,5 @@
 <!-- app/views/user_lessons/show.html.erb -->
-
+<%= render "shared/navbar-player" %>
 
 <div class="container" data-controller="hint">
   <div class="split left">
@@ -29,7 +29,6 @@
     </div>
   </div>
   <div class="split right">
-
     <div class="icon-container">
       <%= link_to dashboard_path, style: 'color: black;' do %>
         <i class="fa-solid fa-xmark fa-3x"></i>
@@ -38,8 +37,7 @@
 
 
     <div class="top">
-      <h2>The Task</h2>
-      <p>current level: <%= @user_lesson.lesson.level.number %></p>
+      <h2 class="mt-2">The Task</h2>
       <!-- Displaying lesson task -->
       <p><%= @user_lesson.lesson.task.html_safe %></p>
     </div>
@@ -55,15 +53,15 @@
   <!-- Concept modal -->
 
   <div class="modal fade" id="conceptModal" data-controller="concept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-center d-flex flex-column align-items-center justify-content-center">
           <h1 class="modal-title fs-5" id="exampleModalLabel"><%= @user_lesson.lesson.name %></h1>
         </div>
         <div class="modal-body">
           <%= render "concept" %>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer justify-content-center">
           <button type="button" class="btn-one" data-bs-dismiss="modal">Got it!</button>
         </div>
       </div>
@@ -74,30 +72,29 @@
 
 <!-- Completion modal-->
  <div class="modal fade" id="completionModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-center d-flex flex-column align-items-center justify-content-center">
           <h1 class="modal-title fs-5" id="lessonCompleted">Congratulations!</h1>
         </div>
-        <div class="modal-body">
-
-          <!--Adding points to user on the modal-->
-          <%= current_user.points %>
-
-          <% if @user_lesson.lesson.number < 6 %>
-            You've completed this lesson! Would you like to continue to the next one?
+        <div class="modal-body text-center d-flex flex-column align-items-center justify-content-center">
+          <!--Adding achievements to user on the modal-->
+          <% if @user_lesson.last_lesson_on_level? %>
+            <p>You've won <strong>50 points</strong> by completing this level!👏</p>
+            <p>Reward unlocked:</p>
+            <p class="achievement"><%= current_user.achievements.last.name %></p>
           <% else %>
-            That was all! You're done! Go back to your dashboard
+            <p>You've won <strong>10 points</strong> by completing this lesson!👏</p>
           <% end %>
         </div>
-        <div class="modal-footer">
-            <%= link_to "Dashboard", dashboard_path, class: "btn btn-one" %>
+
+        <div class="modal-footer justify-content-center">
+            <%= link_to "Dashboard", dashboard_path, class: "btn-second" %>
             <% if @next_user_lesson %>
-              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson), class: "btn btn-one" %>
+              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson), class: "btn-one" %>
             <% else %>
-              <%= link_to "Back to Dashboard", dashboard_path %>
+              <%= link_to "Back to Dashboard", dashboard_path, class: "btn-second" %>
             <% end %>
-          <%#= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
         </div>
       </div>
     </div>

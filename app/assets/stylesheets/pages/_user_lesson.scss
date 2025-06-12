@@ -1,0 +1,14 @@
+.achievement {
+  font-size: 6rem;
+  text-align: center;
+  display: inline-block;
+  animation: pop-bounce 1.2s ease-out;
+}
+
+@keyframes pop-bounce {
+  0%   { transform: scale(0); opacity: 0; }
+  40%  { transform: scale(2); opacity: 1; }
+  60%  { transform: scale(0.9); }
+  80%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}

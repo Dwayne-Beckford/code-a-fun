@@ -4,4 +4,8 @@ class UserLesson < ApplicationRecord
 
   scope :completed, -> { where(completed: true ) }
   scope :incompleted, -> { where(completed: false )}
+
+  def last_lesson_on_level?
+    lesson.level.lessons.order(:number).last == lesson
+  end
 end
