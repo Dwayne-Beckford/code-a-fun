@@ -1,10 +1,69 @@
 /* style.css */
 
-.coda {
-  background-color: #1F1F1F;
-  color: #FFFFFF;
+// this will be take over by the Prism code highlighter
+// .coda {
+//   // background-color: #1F1F1F;
+//   // color: #FFFFFF;
+//   &:focus {
+//     // background-color: #1F1F1F;
+//     // color: #FFFFFF;
+//   }
+// }
+
+pre[class*="language-"] {
+  margin: 0;
+}
+
+.editor-container {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  font-family: "Fira Code", monospace; /* Use same font for both */
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.highlighted-code,
+textarea.editor {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  tab-size: 2;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.highlighted-code {
+  pointer-events: none;
+  z-index: 0;
+  color: white;
+}
+
+textarea.editor {
+  background: transparent;
+  color: transparent;
+  caret-color: white; /* So the cursor is visible */
+  border: 1px solid #444;
+  resize: none;
+  z-index: 1;
+
   &:focus {
-    background-color: #1F1F1F;
-    color: #FFFFFF;
+    background-color: inherit;
+    color: transparent;
+  }
+
+  &::placeholder {
+    color: white;
+    font-style: italic;
   }
 }
