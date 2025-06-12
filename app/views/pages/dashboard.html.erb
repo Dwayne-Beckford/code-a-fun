@@ -2,11 +2,11 @@
 <div class="container-dashboard">
 
 <!--Greeting line-->
-<h2 class="mt-5">Hi <%= current_user.name %>, you're just <%= @uncompleted_in_current_level_count %> lessons away from build the <%= @current_level.name %> game. Let’s go!</h1>
+<h2 class="mt-5">Hi, <%= current_user.name %>, you're just <%= @uncompleted_in_current_level_count %> lessons away from completing <%= @current_level.name %>. Let’s go!</h1>
 
 <!--Progress bar-->
-<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %>%</div>
+<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress.round %>" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar custom-purple" style="width: <%= @progress.round %>%"><%= @progress.round %>%</div>
 </div>
 
 <h2 class="mt-5 text-center">Next Lesson</h2>
@@ -60,5 +60,3 @@
   <% end %>
 </ul>
 </div>
-
-
