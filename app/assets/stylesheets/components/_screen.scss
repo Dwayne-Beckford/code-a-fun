@@ -14,13 +14,14 @@
 /* Control the left side */
 .left {
   left: 0;
+  height: 100vh;
 }
 
 /* Control the right side */
 .right {
   right: 0;
+  height: 100vh;
 }
-
 
 .top .right {
   padding-bottom: 40px;
@@ -33,28 +34,45 @@
 } */
 
 .left .top {
+  height: 100%;
   min-height: 80%;
 }
 
- /* .bottom {
+/* .bottom {
   min-height: 50%;
 } */
 
 .right .bottom {
   padding: 20px;
+  margin-top: 30px;
   border-spacing: 16px;
-  box-shadow: 0 0 0 5px hsl(147, 50%, 47%), 0 0 0 10px black;
+  box-shadow: 3px 3px 0px 3px #3cb472;
   border-radius: 16px;
+  border: 2px solid black;
+  min-height: 300px;
 }
 
 .fa-solid {
   font-size: 40px;
 }
 
-.butter{
-  /* align: right; */
-  align-items: right;
+.butter {
+  margin-top: 10px;
   text-align: right;
   display: flex;
   justify-content: space-between;
+}
+
+.button-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.concept-button {
+  border: none;
+}
+
+form.edit_user_lesson {
+  height: 100%;
 }
