@@ -50,9 +50,9 @@ puts "Hello, \#{name}!"</code></pre>
   HEREDOC
 
   description: <<~HEREDOC,
-    <p>Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables.</p>
+    Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables.
 
-    <p>It’s like giving your computer a brain… and a voice.</p>
+    It’s like giving your computer a brain… and a voice.
   HEREDOC
 
   task: <<~HEREDOC,
