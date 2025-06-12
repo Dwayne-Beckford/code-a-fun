@@ -57,7 +57,11 @@
 <div class="lessons-grid">
   <% @levels.each do |level| %>
     <div class="card-level">
-      <%= image_tag('game-4.gif') %>
+      <% if level.photo.attached? %>
+        <%= cl_image_tag level.photo.key %>
+      <% else %>
+        <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+      <% end %>
       <h2><%= level.name %></h2>
     </div>
   <% end %>
