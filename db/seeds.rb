@@ -25,69 +25,76 @@ diana = User.create(email:"diana@test.com", password: "123456", name: "Diana", p
 david = User.create(email:"david@test.com", password: "123456", name: "David", points: 100)
 
 puts "Creating Level 1"
-file = File.open("app/assets/images/game-1.gif")
-level_one = Level.create(number: 1, name: "Ruby Basics")
-level_one.photo.attach(io: file, filename: "Basics.png", content_type: "image/gif")
+file = File.open("app/assets/images/l-1.gif")
+level_one = Level.create(number: 1, name: "The Basics")
+level_one.photo.attach(io: file, filename: "l-1.gif", content_type: "image/gif")
 level_one.save!
 
 puts "Creating Level 2"
-file = File.open("app/assets/images/game-4.gif")
-level_two = Level.create(number: 2, name: "Snake")
-level_two.photo.attach(io: file, filename: "Snake.png", content_type: "image/gif")
+file = File.open("app/assets/images/game-1.gif")
+level_two = Level.create(number: 2, name: "Directions Master")
+level_two.photo.attach(io: file, filename: "game-1.gif", content_type: "image/gif")
 level_two.save!
 
 puts "Creating Level 3"
-file = File.open("app/assets/images/game-5.gif")
-level_three = Level.create(number: 3, name: "Dodge the Meteor")
-level_three.photo.attach(io: file, filename: "Meteor.png", content_type: "image/gif")
+file = File.open("app/assets/images/game-2.gif")
+level_three = Level.create(number: 3, name: "Whack-a-Dot")
+level_three.photo.attach(io: file, filename: "game-2.gif", content_type: "image/gif")
 level_three.save!
 
 puts "Creating Level 4"
 file = File.open("app/assets/images/game-3.gif")
-level_four = Level.create(number: 4, name: "Wack-a-Dot")
-level_four.photo.attach(io: file, filename: "Wack-a-Dot.png", content_type: "image/gif")
+level_four = Level.create(number: 4, name: "Gold Rush")
+level_four.photo.attach(io: file, filename: "game-3.gif", content_type: "image/gif")
+level_four.save!
+
+puts "Creating Level 5"
+file = File.open("app/assets/images/game-4.gif")
+level_four = Level.create(number: 5, name: "Snake")
+level_four.photo.attach(io: file, filename: "game-4.gif", content_type: "image/gif")
+level_four.save!
+
+puts "Creating Level 6"
+file = File.open("app/assets/images/game-5.gif")
+level_four = Level.create(number: 6, name: "Dodge the Meteor")
+level_four.photo.attach(io: file, filename: "game-5.gif", content_type: "image/gif")
+level_four.save!
+
+puts "Creating Level 7"
+file = File.open("app/assets/images/game-6.gif")
+level_four = Level.create(number: 7, name: "Mega Challenge")
+level_four.photo.attach(io: file, filename: "game-6.gif", content_type: "image/gif")
 level_four.save!
 
 puts "Creating Lesson 1 in Level 1"
-file = File.open("app/assets/images/seed/Arrays.png")
+file = File.open("app/assets/images/seed/1.png")
 lesson_one = Lesson.create!(
-  name: "Output & Variables",
+  name: "Say Hello",
   number: 1,
-  concept: <<~HEREDOC,
-    Let’s break it down:
+  level: level_one,
+  description: "Your code’s first words! Let’s make Ruby speak — and not just mumble.",
+  concept: <<~CONCEPT,
+    <p>In Ruby, the command <code>puts</code> makes your program <strong>say</strong> things. It's like your code shouting out to the world:</p>
 
-    <p><strong>puts</strong> — This tells Ruby to say something. It prints to the screen.</p>
+    <pre><code>puts "I'm alive!"</code></pre>
 
-    <p><strong>Variables</strong> — Think of these as little boxes where Ruby can store information. You can name your box (like <code>name</code> or <code>age</code>) and fill it with stuff (like <code>'Alex'</code> or <code>27</code>).</p>
+    <p>It stands for “put string,” but let’s be honest — it’s really “put sass.” You can use it to print anything inside quotes, and it shows up in your terminal.</p>
 
-    <p>📦 <strong>Example:</strong></p>
-    <pre><code>name = 'Alex'
-puts "Hello, \#{name}!"</code></pre>
+    <p>Ruby’s your sidekick now. Let’s hear it talk. 💬</p>
+  CONCEPT
 
-    <p>🧪 <strong>What’s happening?</strong> We store <code>'Alex'</code> in the box called <code>name</code>. Then we ask Ruby to say “Hello, Alex!” by using <code>\#{name}</code> — that’s called <em>string interpolation</em> (fancy term, easy trick).</p>
-  HEREDOC
+  task: <<~TASK,
+    <p>Your Ruby code just woke up and it’s feeling <strong>dramatic</strong>.</p>
 
-  description: <<~HEREDOC,
-    Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables.
+    <p>Print out this exact mini-monologue using <code>puts</code> (two lines, two puts):</p>
 
-    It’s like giving your computer a brain… and a voice.
-  HEREDOC
+    <pre><code>I demand snacks!
+And maybe… some games too?</code></pre>
 
-  task: <<~HEREDOC,
-    <p><strong>Mission:</strong> Make Ruby Your Hype Buddy</p>
-
-    <p>Write a short Ruby program that:</p>
-    <ul>
-      <li>Stores your name in a variable.</li>
-      <li>Stores your favorite snack in another variable.</li>
-      <li>Uses <code>puts</code> to print a fun message like:<br> Hey Sam! Let's grab some popcorn and code together! 🚀</li>
-    </ul>
-
-    <p>💬 Use your own name and snack. Make it YOU.</p>
-  HEREDOC
-
-  level: level_one)
-lesson_one.photo.attach(io: file, filename: "Arrays.png", content_type: "image/png")
+    <p><em>Bonus points</em> for reading it aloud in a royal accent. 🎭</p>
+  TASK
+)
+lesson_one.photo.attach(io: file, filename: "1.png", content_type: "image/png")
 lesson_one.save!
 
 puts "Creating Lesson 2 in Level 1"
