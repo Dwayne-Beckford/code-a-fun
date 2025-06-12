@@ -32,29 +32,44 @@ level_three = Level.create(number: 3, name: "Snake")
 
 puts "Creating Lesson 1"
 
-lesson_one = Lesson.create!(name: "Output & Variables", number: 1, concept: "Let’s break it down:
+lesson_one = Lesson.create!(
+  name: "Output & Variables",
+  number: 1,
+  concept: <<~HEREDOC,
+    Let’s break it down:
 
-puts — This tells Ruby to say something. It prints to the screen.
+    <p><strong>puts</strong> — This tells Ruby to say something. It prints to the screen.</p>
 
-Variables — Think of these as little boxes where Ruby can store information. You can name your box (like name or age) and fill it with stuff (like 'Alex' or 27).
+    <p><strong>Variables</strong> — Think of these as little boxes where Ruby can store information. You can name your box (like <code>name</code> or <code>age</code>) and fill it with stuff (like <code>'Alex'</code> or <code>27</code>).</p>
 
-📦 Example: name = 'Alex'
-puts 'Hello, \#{name}!',
+    <p>📦 <strong>Example:</strong></p>
+    <pre><code>name = 'Alex'
+puts "Hello, \#{name}!"</code></pre>
 
-🧪 What’s happening? We store 'Alex' in the box called name. Then we ask Ruby to say 'Hello, Alex!' by using \#{name} — that’s called string interpolation (fancy term, easy trick).",
+    <p>🧪 <strong>What’s happening?</strong> We store <code>'Alex'</code> in the box called <code>name</code>. Then we ask Ruby to say “Hello, Alex!” by using <code>\#{name}</code> — that’s called <em>string interpolation</em> (fancy term, easy trick).</p>
+  HEREDOC
 
-description: "Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables. It’s like giving your computer a brain… and a voice.",
-task: "Mission: Make Ruby Your Hype Buddy
+  description: <<~HEREDOC,
+    <p>Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables.</p>
 
-Write a short Ruby program that:
+    <p>It’s like giving your computer a brain… and a voice.</p>
+  HEREDOC
 
-Stores your name in a variable.
+  task: <<~HEREDOC,
+    <p><strong>Mission:</strong> Make Ruby Your Hype Buddy</p>
 
-Stores your favorite snack in another variable.
+    <p>Write a short Ruby program that:</p>
+    <ul>
+      <li>Stores your name in a variable.</li>
+      <li>Stores your favorite snack in another variable.</li>
+      <li>Uses <code>puts</code> to print a fun message like:<br> Hey Sam! Let's grab some popcorn and code together! 🚀</li>
+    </ul>
 
-Uses puts to print a fun message like:  Hey Sam! Let's grab some popcorn and code together! 🚀
+    <p>💬 Use your own name and snack. Make it YOU.</p>
+  HEREDOC
 
-💬 Use your own name and snack. Make it YOU.", level: level_one)
+  level: level_one
+)
 
 puts "Creating Lesson 2 in Level 1"
 

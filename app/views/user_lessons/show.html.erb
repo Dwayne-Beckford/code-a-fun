@@ -29,7 +29,7 @@
       <h2>The Task</h2>
       <p>current level: <%= @user_lesson.lesson.level.number %></p>
       <!-- Displaying lesson task -->
-      <p><%= @user_lesson.lesson.task %></p>
+      <p><%= @user_lesson.lesson.task.html_safe %></p>
     </div>
     <div class = "bottom">
       <h2>Feedback Response</h2>
@@ -41,6 +41,7 @@
   </div>
 
   <!-- Concept modal -->
+
   <div class="modal fade" id="conceptModal" data-controller="concept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
