@@ -11,7 +11,8 @@
 
   <h2 class="mt-2">Next Lesson</h2>
   <div class="card-next-lesson">
-    <%= image_tag('seed/Classes.png', alt: 'Classes') %>
+    <%= cl_image_tag @next_lesson.photo.key %>
+
     <div class="card-next-lesson-info">
       <h2><%= @next_lesson.name %></h2>
       <p><%= @next_lesson.description%></p>
@@ -31,7 +32,12 @@
   <div class="lessons-grid">
     <% @completed_lessons.each do |user_lesson| %>
     <div class="card-lesson">
-      <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+      <% if user_lesson.lesson.photo.attached? %>
+          <%= cl_image_tag user_lesson.lesson.photo.key, width: 400, crop: :fill %>
+        <% else %>
+          <%= image_tag "seed/Classes.png", width: 400 %>
+        <% end %>
+
       <div class="card-lesson-info">
         <h2><%= link_to user_lesson.lesson.name, user_lesson_path(user_lesson) %></h2>
         <p><%= user_lesson.lesson.description %></p>
