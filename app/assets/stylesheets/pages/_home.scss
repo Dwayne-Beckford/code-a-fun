@@ -7,10 +7,6 @@
     float: right;
     justify-content: right;
 }
-#how {
-  padding-top: 24px;
-  margin-top: 215px;
-}
 
 .left-side,
 .right-side {
@@ -27,6 +23,16 @@
 .right-side img {
   width: 40vw; /* 40% of viewport width */
   height: auto;
+}
+
+#how {
+  padding-top: 24px;
+  margin-top: 40px; // or even 40px depending on your spacing needs
+}
+
+#results {
+  padding-top: 24px;
+  margin-top: 20px; // or even 40px depending on your spacing needs
 }
 
 // card

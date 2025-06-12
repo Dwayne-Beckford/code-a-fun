@@ -13,11 +13,16 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render "shared/flashes" %>
-    <%= yield %>
+  <body class="d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1">
+      <%= render "shared/flashes" %>
+      <%= yield %>
+    </main>
+
     <% unless @no_footer %>
       <%= render "shared/footer" %>
     <% end %>
+
   </body>
 </html>
