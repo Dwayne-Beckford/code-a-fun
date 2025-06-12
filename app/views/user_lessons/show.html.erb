@@ -91,13 +91,11 @@
           <% end %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn-one" data-bs-dismiss="modal">Dashboard</button>
-            <button type="button" class="btn-one" data-bs-dismiss="modal">Next Lesson</button>
-            <%= link_to "Dashboard", dashboard_path %>
+            <%= link_to "Dashboard", dashboard_path, class: "btn-second" %>
             <% if @next_user_lesson %>
-              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
+              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson), class: "btn-one" %>
             <% else %>
-              <%= link_to "Back to Dashboard", dashboard_path %>
+              <%= link_to "Back to Dashboard", dashboard_path, class: "btn-second" %>
             <% end %>
           <%#= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
         </div>
