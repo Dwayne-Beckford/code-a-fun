@@ -1,27 +1,19 @@
 <!-- app/views/user_lessons/show.html.erb -->
 
-<<<<<<< HEAD
-  <h2>User answer</h2>
-  <div data-controller="hint">
-    <%= simple_form_for @user_lesson do |f|  %>
-      <code class="coda"><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput"}, class: "coda"} %></code>
-      <%= f.submit "Run", class: "btn btn-one" %>
-    <% end %>
-    <button data-action="click->hint#sendFeedback">Feedback</button>
-=======
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/font-awesome.min.css">
 <div class="container" data-controller="hint">
   <div class="split left">
     <div class="top">
       <!-- <h2>User answer</h2> -->
-      <%= simple_form_for @user_lesson do |f|  %>
-        <code class="coda"><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput"}, class: "coda", rows:19, columns:2} %></code>
+      <%=simple_form_for @user_lesson do |f|  %>
+      <div data-controller="codemirror" >
+      </div>
+        <!--<code class="coda" ><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput", controller: "codemirror"}, class: "coda", rows:19, columns:2} %></code>-->
         <!-- Use of Bootstrap v5.3 is paramount in any case.-->
         <!-- Button trigger Concept modal -->
         <div class="butter">
           <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
           <button class="btn btn-one" data-action="click->hint#sendFeedback">Feedback</button>
->>>>>>> 9c1230446d3027874f9673a613a290f57d990977
 
           <%= f.submit "Run", class: "btn btn-one" %>
         </div>
@@ -85,7 +77,7 @@
           <button type="button" class="btn-one" data-bs-dismiss="modal">Dashboard</button>
            <button type="button" class="btn-one" data-bs-dismiss="modal">Next Lesson</button>
            <%= link_to "Dashboard", dashboard_path %>
-           
+
            <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
           <%= link_to "Next Lesson", user_lesson_path(@user_lesson)%>
         </div>
