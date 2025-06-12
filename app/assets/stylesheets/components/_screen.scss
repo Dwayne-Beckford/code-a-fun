@@ -2,6 +2,8 @@
 
 .split {
   width: 50%;
+  height: calc(100vh - 50px);
+  margin-top: 50px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -14,13 +16,11 @@
 /* Control the left side */
 .left {
   left: 0;
-  height: 100vh;
 }
 
 /* Control the right side */
 .right {
   right: 0;
-  height: 100vh;
 }
 
 .top .right {
