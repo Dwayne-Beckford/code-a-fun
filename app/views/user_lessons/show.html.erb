@@ -10,18 +10,20 @@
           <pre aria-hidden="true" class="highlighted-code">
             <code class="language-ruby highlighted-code" data-highlight-target="highlight"></code>
           </pre>
-          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2}, input_html_classes: [] %>     
+          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2, placeholder: 'Write your code here'}, input_html_classes: [] %>     
         </div>
 
         <!-- Use of Bootstrap v5.3 is paramount in any case.-->
         <!-- Button for Concept modal -->
           <div class="butter">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
-            <!-- Button Test -->
-            <button class="btn btn-second" data-action="click->hint#sendFeedback">Test</button>
-            
-            <!-- Form and button Run -->
-            <%= f.submit "Run", class: "btn btn-one" %>
+            <button class="concept-button" type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
+            <div class="butter-buttons">
+              <!-- Button Test -->
+              <button class="btn btn-second" data-action="click->hint#sendFeedback">Test</button>
+              
+              <!-- Form and button Run -->
+              <%= f.submit "Run", class: "btn btn-one" %>
+            </div>
           </div>
       <% end %>
     </div>
@@ -34,7 +36,7 @@
       <p><%= @user_lesson.lesson.task.html_safe %></p>
     </div>
     <div class = "bottom">
-      <h2>Feedback Response</h2>
+      <h2>Feedback</h2>
       <!-- Feedback response -->
       <%= render 'ai_response', content: @content %>
 
