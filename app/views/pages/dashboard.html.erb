@@ -52,11 +52,15 @@
   <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
 <% end %>
 
-<!--Remove when done-->
-<h2 class="mt-4">Completed Levels</h3>
-<ul>
+<!--Levels-->
+<h2 class="mt-5 text-center">Completed Levels</h3>
+<div class="lessons-grid">
   <% @levels.each do |level| %>
-    <li><%= level.name %></li>
+    <div class="card-level">
+      <%= image_tag('game-4.gif') %>
+      <h2><%= level.name %></h2>
+    </div>
   <% end %>
-</ul>
+</div>
+
 </div>
