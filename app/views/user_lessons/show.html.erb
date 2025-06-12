@@ -12,12 +12,8 @@
           <div class="butter">
             <button type="button" data-bs-toggle="modal" data-bs-target="#conceptModal"><i class="fa-solid fa-book-medical"></i></button>
             <!-- Button Test -->
-            <button class="btn btn-one" data-action="click->hint#sendFeedback">Test</button>
-            <% if @next_user_lesson %>
-              <%= link_to "Next Lesson", user_lesson_path(@next_user_lesson) %>
-            <% else %>
-              <%= link_to "Back to Dashboard", dashboard_path %>
-            <% end %>
+            <button class="btn btn-second" data-action="click->hint#sendFeedback">Test</button>
+            
             <!-- Form and button Run -->
             <%= f.submit "Run", class: "btn btn-one" %>
           </div>
