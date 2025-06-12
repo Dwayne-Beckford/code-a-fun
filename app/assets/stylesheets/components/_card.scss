@@ -70,31 +70,33 @@
   object-fit: cover;
 }
 
+.card-lesson-info {
+  padding: 16px;
+  flex-grow: 1; // helps it take remaining space
+}
+
 .card-lesson h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
+  padding: 0;
 }
 
 .card-lesson a {
   text-decoration: none;
   color: black;
-}
-
-.card-lesson p {
-  font-size: 12px;
-  opacity: .7;
-  font-family: "Space Mono", "Courier New", monospace;
-}
-
-.card-lesson-info {
-  padding: 16px 16px 0 16px;
-  flex-grow: 1; // helps it take remaining space
+  margin: 0;
+  padding: 0;
 }
 
 .card-lesson-info p {
   padding: 16px 16px 0 16px;
   flex-grow: 1; // helps it take remaining space
+  font-size: 12px;
+  opacity: .7;
+  font-family: "Space Mono", "Courier New", monospace;
+  margin: 0;
+  padding: 0;
 }
 
 // Level card
