@@ -3,10 +3,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/font-awesome.min.css">
 <div class="container" data-controller="hint">
   <div class="split left">
-    <div class="top">
+    <div class="top" data-controller="highlight">
       <!-- <h2>User answer</h2> -->
       <%= simple_form_for @user_lesson do |f|  %>
-        <code class="coda"><%= f.input :user_input, label: "", input_html: {data: {hint_target: "formInput"}, class: "coda", rows:19, columns:2} %></code>
+        <div class="editor-container">
+          <pre aria-hidden="true" class="highlighted-code">
+            <code class="language-ruby highlighted-code" data-highlight-target="highlight"></code>
+          </pre>
+          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2}, input_html_classes: [] %>     
+        </div>
+
         <!-- Use of Bootstrap v5.3 is paramount in any case.-->
         <!-- Button for Concept modal -->
           <div class="butter">
