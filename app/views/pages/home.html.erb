@@ -1,26 +1,26 @@
-<%# TODO %>
-<%# checks to be at the bottom of div %>
-<%# update features icons %>
-<%# add footer that will stick to the page bottom %>
 <%= render "shared/navbar" %>
 <div class="container">
 
   <div class="split-screen">
-    <div class="left-side mt-5">
-      <h1 class="mt-5">Learn to Code the Fun Way!</h1>
-      <p>Tried learning code and gave up? This time, you will get addicted to it!</p>
-        <%= link_to "START LEARNING", dashboard_path, class: "btn-one mt-3" %>
-      <div class="bottom-icons d-flex gap-3 mt-3">
+
+    <div class="left-side">
+      <h1 class="mt-5 mb-2">Learn to Code the Fun Way!</h1>
+      <p class="mb-5">Tried learning code and gave up? This time, you will get addicted to it!</p>
+
+        <%= link_to "START LEARNING", dashboard_path, class: "btn-one mt-3 py-3 px-4 fs-5" %>
+
+      <div class="bottom-icons d-flex gap-3 mt-5">
+
         <div class="d-flex align-items-center gap-1">
-          <i class="fa-solid fa-square-check" style="color: #00b799;"></i><p class="mb-0">Code</p>
+          <i class="fa-solid fa-square-check fa-xs" style="color: #00b799; font-size: 1.5rem;"></i><p class="mb-0">Code</p>
         </div>
 
         <div class="d-flex align-items-center gap-1">
-          <i class="fa-solid fa-square-check" style="color: #00b799;"></i><p class="mb-0">Build games</p>
+          <i class="fa-solid fa-square-check fa-2xs" style="color: #00b799; font-size: 1.5rem;"></i><p class="mb-0">Build games</p>
         </div>
 
         <div class="d-flex align-items-center gap-1">
-          <i class="fa-solid fa-square-check" style="color: #00b799;"></i><p class="mb-0">Have fun!</p>
+          <i class="fa-solid fa-square-check fa-2xs" style="color: #00b799; font-size: 1.5rem;"></i><p class="mb-0">Have fun!</p>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
 <div class="d-flex justify-content-center align-items-center text-center vh-100 flex-column">
 
 <section id="how">
-<h2>How it Works</h2>
+<h2 class="mt-5">How it Works</h2>
 
 <div class="container-small">
 
