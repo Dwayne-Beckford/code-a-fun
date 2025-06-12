@@ -1,11 +1,12 @@
+<%= render "shared/navbar-user" %>
 <div class="container">
-<h3>Achievement's</h3>
+<h3>Achievements</h3>
 <%= current_user.points%>
 <%= current_user.name %>
 <!--Progress bar-->
 <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
   <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %></div>
-  
+
 </div>
   <h1 class="mt-2">Dashboard</h1>
 
