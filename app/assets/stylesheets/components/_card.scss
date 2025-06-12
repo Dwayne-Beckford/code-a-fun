@@ -3,13 +3,14 @@
   overflow: hidden;
   background: white;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 2px solid black;
   max-width: 300px;
   max-height: 300px;
   margin: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; // ensures content fills vertical space
+  justify-content: space-between;
+  box-shadow: 8px 8px 0 #c2c2c2;
 }
 
 .card-lesson > img {
@@ -48,10 +49,15 @@
   height: 200px;
   background: white;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 3px solid black;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  box-shadow: 8px 8px 0 #c2c2c2;
+}
+
+.card-next-lesson-info {
+  padding: 16px;
 }
 
 .card-next-lesson img {
@@ -61,6 +67,7 @@
 }
 
 .card-next-lesson h2 {
+  padding-top: 16px;
   font-size: 20px;
   font-weight: bold;
   margin: 0;
@@ -70,9 +77,13 @@
   font-size: 16px;
   line-height: 1.4;
   opacity: .7;
-  margin-bottom: 0;
+  margin-bottom: 16px;
   margin-top: 8px;
   font-family: "Space Mono", "Courier New", monospace;
+}
+
+.card-next-lesson a {
+  margin-bottom: 50px !important;
 }
 
 .card-next-lesson .card-next-lesson-info {

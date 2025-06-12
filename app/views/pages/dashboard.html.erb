@@ -2,7 +2,7 @@
 <div class="container-dashboard">
 
 <!--Greeting line-->
-<h2 class="mt-5">Hi <%= current_user.name %>, just <%= @uncompleted_in_current_level_count %> lessons until <%= @current_level.name %> game. Let’s go!</h1>
+<h2 class="mt-5">Hi <%= current_user.name %>, just <%= @uncompleted_in_current_level_count %> lessons until you can build <%= @current_level.name %> game. Let’s go!</h1>
 
 <!--Progress bar-->
 <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
@@ -15,9 +15,9 @@
   <%= image_tag('seed/Classes.png', alt: 'Classes') %>
   <div class="card-next-lesson-info">
     <h2><%= @next_lesson.name %></h2>
-    <p class="mb-4"><%= @next_lesson.description%></p>
+    <p><%= @next_lesson.description%></p>
     <% if @user_lesson %>
-      <%= link_to "START", user_lesson_path(@user_lesson), class: "btn-one" %>
+      <%= link_to "START", user_lesson_path(@user_lesson), class: "btn-one mb-5" %>
     <% else %>
       <p>All lessons finished</p>
     <% end %>
