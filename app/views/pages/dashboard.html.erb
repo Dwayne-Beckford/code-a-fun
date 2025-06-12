@@ -1,23 +1,22 @@
 <%= render "shared/navbar-user" %>
 <div class="container">
-<h3>Achievements</h3>
-<%= current_user.points%>
-<%= current_user.name %>
+
+<!--Greeting line-->
+<h2>Hi <%= current_user.name %>, in just X lessons, you’ll be able to build <%= @current_level.name %> from scratch. Let’s go!</h1>
+
 <!--Progress bar-->
 <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
   <div class="progress-bar" style="width: <%= @progress %>%"><%= @progress %></div>
 
 </div>
-  <h1 class="mt-2">Dashboard</h1>
 
+  <!--Next Lesson-->
   <h2 class="mt-2">Next Lesson</h2>
   <div class="card-next-lesson">
     <%= image_tag('seed/Classes.png', alt: 'Classes') %>
     <div class="card-next-lesson-info">
       <h2><%= @next_lesson.name %></h2>
       <p><%= @next_lesson.description%></p>
-
-      <!--User next leeson-->
       <a class="btn-one mt-2">START</a>
       <% if @user_lesson %>
         <%= link_to "Next lesson", user_lesson_path(@user_lesson) %>
@@ -27,6 +26,7 @@
     </div>
   </div>
 
+  <!--Past Lessons-->
   <h2 class="mt-5">Want to Refresh Your Memory?</h2>
   <% if @completed_lessons.any? %>
   <div class="lessons-grid">
@@ -44,18 +44,7 @@
     <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
   <% end %>
 
-  <%# <% @levels.each do | level| %>
-  <%# <p><%= level.completed%>
-  <%# <p><%= level.lesson.name %>
-  <%# <% end %>
-
-<h2 class="mt-4">Your Current Level</h2>
-<% if @current_level %>
-  <p><%= @current_level.name %></p>
-<% else %>
-  <p>You've completed all levels! 🎉</p>
-<% end %>
-
+<!--Remove when done-->
 <h2 class="mt-4">Completed Levels</h3>
 <ul>
   <% @levels.each do |level| %>
