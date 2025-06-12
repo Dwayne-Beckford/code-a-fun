@@ -1,6 +1,6 @@
 <!-- app/views/user_lessons/show.html.erb -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/font-awesome.min.css">
+
 <div class="container" data-controller="hint">
   <div class="split left">
     <div class="top" data-controller="highlight">
@@ -10,7 +10,7 @@
           <pre aria-hidden="true" class="highlighted-code">
             <code class="language-ruby highlighted-code" data-highlight-target="highlight"></code>
           </pre>
-          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2, placeholder: 'Write your code here'}, input_html_classes: [] %>     
+          <%= f.input :user_input, as: :text, label: false, input_html: { class: 'editor', data: { action: 'keydown->highlight#handleTab input->highlight#updateHighlight',  'highlight-target': 'editor',  hint_target: 'formInput'}, rows: 19, cols: 2, placeholder: 'Write your code here'}, input_html_classes: [] %>
         </div>
 
         <!-- Use of Bootstrap v5.3 is paramount in any case.-->
@@ -20,7 +20,7 @@
             <div class="butter-buttons">
               <!-- Button Test -->
               <button class="btn btn-second" data-action="click->hint#sendFeedback">Test</button>
-              
+
               <!-- Form and button Run -->
               <%= f.submit "Run", class: "btn btn-one" %>
             </div>

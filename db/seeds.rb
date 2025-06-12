@@ -20,18 +20,17 @@ User.destroy_all
 
 # 2. Creating
 
-puts "Creating user Dave"
-david = User.create(email:"david@test.com", password: "123456", name: "David", points: 40)
-jane = User.create(email:"jane@test.com", password: "123456", name: "Jane", points: 30)
+puts "Creating users"
 diana = User.create(email:"diana@test.com", password: "123456", name: "Diana", points: 0)
+david = User.create(email:"david@test.com", password: "123456", name: "David", points: 100)
 
-puts "Creating Level Basics"
-level_one = Level.create(number: 1, name: "Basics")
-level_two = Level.create(number: 2, name: "Dodge the Meteor")
-level_three = Level.create(number: 3, name: "Snake")
+puts "Creating 4 Levels"
+level_one = Level.create(number: 1, name: "Ruby Basics")
+level_two = Level.create(number: 2, name: "Snake")
+level_three = Level.create(number: 3, name: "Dodge the Meteor")
+level_four = Level.create(number: 4, name: "Super Challenge")
 
-puts "Creating Lesson 1"
-
+puts "Creating Lesson 1 in Level 1"
 file = File.open("app/assets/images/seed/Arrays.png")
 lesson_one = Lesson.create!(
   name: "Output & Variables",
@@ -68,34 +67,47 @@ puts "Hello, \#{name}!"</code></pre>
 
     <p>💬 Use your own name and snack. Make it YOU.</p>
   HEREDOC
-  
-  level: level_one)
 
+  level: level_one)
 lesson_one.photo.attach(io: file, filename: "Arrays.png", content_type: "image/png")
 lesson_one.save!
- 
 
 puts "Creating Lesson 2 in Level 1"
-
 file = File.open("app/assets/images/seed/Classes.png")
-lesson_two = Lesson.create(name: "Classes", number: 2, concept: "In object-oriented programming, a class defines the shared aspects of objects created from the class. The capabilities of a class differ between programming languages, but generally the shared aspects consist of state (variables) and behavior (methods) that are each either associated with a particular object or with all objects of that class.", description: "In this lesson you'll learn everything about classes: what they are, how to write them and more.", task: "Create a class for animals", level: level_one)
+lesson_two = Lesson.create(name: "Classes", number: 2, concept: "In object-oriented programming, a class defines the shared aspects of objects created from the class. The capabilities of a class differ between programming languages, but generally the shared aspects consist of state (variables) and behavior (methods) that are each either associated with a particular object or with all objects of that class.", description: "In this lesson you'll learn everything about classes: what they are, how to write them and more.", task: "Create a class for animals", answer: "class Animal
+  def speak
+    puts 'Roar!''
+  end
+end", level: level_one)
 lesson_two.photo.attach(io: file, filename: "Classes.png", content_type: "image/png")
 lesson_two.save!
 
-puts "Creating Lesson 3 in Level 2"
-lesson_three = Lesson.create(name: "Conditional Logic", number: 3, concept: "Conditional logic, also known as conditional statements or conditionals, is a fundamental programming concept that allows a program to make decisions and execute different code blocks based on whether specific conditions are true or false. This enables programs to adapt to user input and varying situations, providing more complex and flexible functionality.", description: "In this lesson you'll learn everything about if statements: what they are, how to write them and more.", task: "Create an if for an voting age checker", answer: 'if age > 18 puts you cant vote', level: level_two)
+puts "Creating Lesson 3 in Level 1"
+lesson_three = Lesson.create(name: "Conditional Logic", number: 3, concept: "Conditional logic, also known as conditional statements or conditionals, is a fundamental programming concept that allows a program to make decisions and execute different code blocks based on whether specific conditions are true or false. This enables programs to adapt to user input and varying situations, providing more complex and flexible functionality.", description: "In this lesson you'll learn everything about if statements: what they are, how to write them and more.", task: "Create an if for an voting age checker", answer: "if age > 18 puts you cant vote', answer: age = 16
+
+if age >= 18
+  puts 'You can vote!'
+else
+  puts 'Sorry, you're not old enough to vote.'
+end", level: level_one)
 file = File.open("app/assets/images/seed/Conditional_logic.png")
 lesson_three.photo.attach(io: file, filename: "Conditional_logic.png", content_type: "image/png")
 lesson_three.save!
 
 puts "Creating Lesson 4 in Level 2"
-lesson_four = Lesson.create(name: "Database", number: 4, concept: "Database programming involves using specific languages and techniques to interact with and manage databases, enabling them to store, retrieve, and manipulate data. It's crucial for various applications, from self-driving cars to package tracking systems.", description: "In this lesson you'll learn everything about db: what they are, how to write them and more.", task: "Create a db for a hospitals", answer: "rails g",  level: level_two)
+lesson_four = Lesson.create(name: "Database Part 1", number: 4, concept: "Database programming involves using specific languages and techniques to interact with and manage databases, enabling them to store, retrieve, and manipulate data. It's crucial for various applications, from self-driving cars to package tracking systems.", description: "In this lesson you'll learn everything about db: what they are, how to write them and more.", task: "Create a db for a hospitals", answer: "rails g",  level: level_two)
 file = File.open("app/assets/images/seed/db.png")
 lesson_four.photo.attach(io: file, filename: "db.png", content_type: "image/png")
 lesson_four.save!
 
-puts "Creating Lesson 5 in Level 2 (Game)"
-lesson_five = Lesson.create(name: "Build Dodge the Meteor!", number: 5, concept: "Collision detection + player movement. Let's combine everything you've learnt to build a game where meteors fall from the sky and your spaceship needs to avoid collision, or else it's Game Over!", description: "The sky’s falling! In this mini-game, you’ll control a character that must dodge incoming meteors. You’ll combine keyboard controls with basic collision logic to keep the player alive as long as possible.", task: "Build a 2D game where the player moves left and right to dodge falling meteors.
+puts "Creating Lesson 5 in Level 3"
+lesson_five = Lesson.create(name: "Database Part 2", number: 5, concept: "Database programming involves using specific languages and techniques to interact with and manage databases, enabling them to store, retrieve, and manipulate data. It's crucial for various applications, from self-driving cars to package tracking systems.", description: "In this lesson you'll learn everything about db: what they are, how to write them and more.", task: "Create a db for a hospitals", answer: "rails g",  level: level_three)
+file = File.open("app/assets/images/seed/db.png")
+lesson_four.photo.attach(io: file, filename: "db.png", content_type: "image/png")
+lesson_four.save!
+
+puts "Creating Lesson 6 in Level 2 (Game)"
+lesson_six = Lesson.create(name: "Build Dodge the Meteor!", number: 6, concept: "Collision detection + player movement. Let's combine everything you've learnt to build a game where meteors fall from the sky and your spaceship needs to avoid collision, or else it's Game Over!", description: "The sky’s falling! In this mini-game, you’ll control a character that must dodge incoming meteors. You’ll combine keyboard controls with basic collision logic to keep the player alive as long as possible.", task: "Build a 2D game where the player moves left and right to dodge falling meteors.
 Your game should:
 	•	Let the player move smoothly with arrow keys
 	•	Spawn meteors that fall from the top
@@ -184,37 +196,34 @@ update do
   end
 end
 
-show", level: level_two)
+show", level: level_three)
 file = File.open("app/assets/images/game-5.gif")
 lesson_five.photo.attach(io: file, filename: "game-5.gif", content_type: "image/gif")
 lesson_five.save!
 
-puts "Creating Lesson 6 in Level 1"
-lesson_six = Lesson.create(name: "Hashes", number: 6, concept: "Hashing in programming involves using a mathematical algorithm (a hash function) to convert data into a fixed-length value, often called a hash code or hash value. This process is used in various applications, including data storage and retrieval, security measures like password storage, and digital signatures.", description: "In this lesson you'll learn everything about hashes: what they are, how to write them and more.", task: "Create a hash for movies", answer: 'eaxmple = {"key"=> "value"}', level: level_three)
+puts "Creating Lesson 7 in Level 4"
+lesson_seven = Lesson.create(name: "Hashes", number: 7, concept: "Hashing in programming involves using a mathematical algorithm (a hash function) to convert data into a fixed-length value, often called a hash code or hash value. This process is used in various applications, including data storage and retrieval, security measures like password storage, and digital signatures.", description: "In this lesson you'll learn everything about hashes: what they are, how to write them and more.", task: "Create a hash for movies", answer: 'eaxmple = {"key"=> "value"}', level: level_four)
 file = File.open("app/assets/images/seed/Hashes.png")
 lesson_six.photo.attach(io: file, filename: "Hashes.png", content_type: "image/png")
 lesson_six.save!
 
-puts "Creating user levels"
-davids_last_level = UserLevel.create(completed: true, user: david, level: level_one)
-janes_last_level = UserLevel.create(completed: false, user: jane, level: level_one)
 
 puts "Creating David's progress"
-# Marks multiple lessons as complete (from 1 to 5)
-[lesson_one, lesson_two, lesson_three, lesson_four].each do |lesson|
+# Marks multiple levels as complete
+[level_one, level_two].each do |level|
+  UserLevel.create(completed: true, user: david, level: level)
+end
+
+# Marks multiple lessons as complete
+[lesson_one, lesson_two, lesson_three, lesson_four, lesson_five].each do |lesson|
   UserLesson.create(completed: true, user: david, lesson: lesson)
 end
 
-puts "Creating Jane's progress"
-[lesson_one, lesson_two, lesson_three].each do |lesson|
-  UserLesson.create(completed: true, user: jane, lesson: lesson)
-end
 
 puts "Creating Dave's achievements"
-davids_achievement = Achievement.create(user: david, name: "🏆")
+davids_achievement_level_1 = Achievement.create(user: david, name: "🥇")
+davids_achievement_level_2 = Achievement.create(user: david, name: "🥈")
 
-puts "Creating Jane's achievements"
-janes_achievement = Achievement.create(user: jane, name: "Silver Medal")
 
 # Done!
 puts "All done! Created #{User.count} users, #{Lesson.count} lessons, #{Level.count} levels, #{Achievement.count} achievements and #{UserLesson.count} progresses (user lessons)"
