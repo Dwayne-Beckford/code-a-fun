@@ -11,7 +11,7 @@
 
 <h2 class="mt-5 text-center">Next Lesson</h2>
 <div class="card-next-lesson">
-  <%= image_tag('seed/Classes.png', alt: 'Classes') %>
+  <%= cl_image_tag @user_lesson.lesson.photo.key %>
   <div class="card-next-lesson-info">
     <h2><%= @next_lesson.name %></h2>
     <p><%= @next_lesson.description%></p>
