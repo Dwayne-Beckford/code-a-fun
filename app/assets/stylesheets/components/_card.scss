@@ -1,57 +1,16 @@
-// Finished lessons card
-.card-lesson {
-  overflow: hidden;
-  background: white;
-  border-radius: 20px;
-  border: 1px solid black;
-  max-width: 300px;
-  max-height: 300px;
-  margin: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; // ensures content fills vertical space
-}
-
-.card-lesson > img {
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.card-lesson h2 {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.card-lesson a {
-  text-decoration: none;
-  color: black;
-}
-
-.card-lesson p {
-  font-size: 12px;
-  opacity: .7;
-  font-family: "Space Mono", "Courier New", monospace;
-}
-
-.card-lesson-info {
-  padding: 16px 16px 0px 16px;
-  flex-grow: 1; // helps it take remaining space
-}
-
-
 // Next lesson card
 
 .card-next-lesson {
   overflow: hidden;
-  height: 200px;
+  height: 250px;
   background: white;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 3px solid black;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  box-shadow: 8px 8px 0 #c2c2c2;
+  box-sizing: border-box;
 }
 
 .card-next-lesson img {
@@ -60,24 +19,84 @@
   object-fit: cover;
 }
 
-.card-next-lesson h2 {
+.card-next-lesson-info {
+  padding: 16px 32px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.card-next-lesson-info h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.card-next-lesson-info p {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: .7;
+  font-family: "Space Mono", "Courier New", monospace;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.card-next-lesson-info a {
+  margin: 0;
+  align-self: flex-start; /* keeps button aligned left, no stretch */
+  width: auto; /* prevents full-width stretch */
+}
+
+// Finished lessons card
+.card-lesson {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid black;
+  max-width: 300px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 8px 8px 0 #c2c2c2;
+}
+
+.card-lesson > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-lesson-info {
+  padding: 16px;
+  flex-grow: 1; // helps it take remaining space
+}
+
+.card-lesson h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
+  padding: 0;
 }
 
-.card-next-lesson p {
+.card-lesson a {
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.card-lesson-info p {
+  padding: 16px 16px 0 16px;
+  flex-grow: 1; // helps it take remaining space
   font-size: 12px;
-  line-height: 1.4;
   opacity: .7;
-  margin-bottom: 0;
-  margin-top: 8px;
   font-family: "Space Mono", "Courier New", monospace;
-}
-
-.card-next-lesson .card-next-lesson-info {
-  padding: 16px;
-  padding-left: 32px;
+  margin: 0;
+  padding: 0;
 }
 
 // Level card

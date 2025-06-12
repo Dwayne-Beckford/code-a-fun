@@ -1,15 +1,18 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-  <div class="col-6">
+  <div class="container-fluid d-flex justify-content-between align-items-center px-5">
+  <!-- Left side -->
+  <div class="d-flex align-items-center ps-4">
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo.png" %>
     <% end %>
-
+    <!-- Mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+  <!-- Right side -->
   </div>
-    <div class="collapse navbar-collapse col-6" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
@@ -19,11 +22,11 @@
             <%= link_to "Results", "#results", class: "nav-link navbar-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn-second nav-link navbar-link" %>
+            <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn-second nav-link navbar-link me-5" %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "btn-second nav-link navbar-link" %>
+            <%= link_to "Login", new_user_session_path, class: "btn-second nav-link navbar-link me-5" %>
           </li>
         <% end %>
       </ul>

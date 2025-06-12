@@ -25,6 +25,9 @@ class PagesController < ApplicationController
     @levels = current_user.completed_levels
 
     @current_level = current_user.user_lessons.where(completed: false).last.lesson.level
+    @completed_in_current_level = @current_level.completed_by_user_count(current_user)
+    @all_level_lessons = @current_level.lessons
+    @uncompleted_in_current_level_count = @all_level_lessons.count - @completed_in_current_level
 
     # see the last achievement
     @last_achievement = current_user.achievements.order(created_at: :desc).first
