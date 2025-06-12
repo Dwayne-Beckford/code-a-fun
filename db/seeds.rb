@@ -32,32 +32,48 @@ level_three = Level.create(number: 3, name: "Snake")
 
 puts "Creating Lesson 1"
 
-lesson_one = Lesson.create!(name: "Output & Variables", number: 1, concept: "Let’s break it down:
-
-puts — This tells Ruby to say something. It prints to the screen.
-
-Variables — Think of these as little boxes where Ruby can store information. You can name your box (like name or age) and fill it with stuff (like 'Alex' or 27).
-
-📦 Example: name = 'Alex'
-puts 'Hello, \#{name}!',
-
-🧪 What’s happening? We store 'Alex' in the box called name. Then we ask Ruby to say 'Hello, Alex!' by using \#{name} — that’s called string interpolation (fancy term, easy trick).",
-
-description: "Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables. It’s like giving your computer a brain… and a voice.",
-task: "Mission: Make Ruby Your Hype Buddy
-
-Write a short Ruby program that:
-
-Stores your name in a variable.
-
-Stores your favorite snack in another variable.
-
-Uses puts to print a fun message like:  Hey Sam! Let's grab some popcorn and code together! 🚀
-
-💬 Use your own name and snack. Make it YOU.", level: level_one)
 file = File.open("app/assets/images/seed/Arrays.png")
+lesson_one = Lesson.create!(
+  name: "Output & Variables",
+  number: 1,
+  concept: <<~HEREDOC,
+    Let’s break it down:
+
+    <p><strong>puts</strong> — This tells Ruby to say something. It prints to the screen.</p>
+
+    <p><strong>Variables</strong> — Think of these as little boxes where Ruby can store information. You can name your box (like <code>name</code> or <code>age</code>) and fill it with stuff (like <code>'Alex'</code> or <code>27</code>).</p>
+
+    <p>📦 <strong>Example:</strong></p>
+    <pre><code>name = 'Alex'
+puts "Hello, \#{name}!"</code></pre>
+
+    <p>🧪 <strong>What’s happening?</strong> We store <code>'Alex'</code> in the box called <code>name</code>. Then we ask Ruby to say “Hello, Alex!” by using <code>\#{name}</code> — that’s called <em>string interpolation</em> (fancy term, easy trick).</p>
+  HEREDOC
+
+  description: <<~HEREDOC,
+    <p>Let’s talk to your computer! In this lesson, you’ll learn how to make Ruby say things and remember stuff using variables.</p>
+
+    <p>It’s like giving your computer a brain… and a voice.</p>
+  HEREDOC
+
+  task: <<~HEREDOC,
+    <p><strong>Mission:</strong> Make Ruby Your Hype Buddy</p>
+
+    <p>Write a short Ruby program that:</p>
+    <ul>
+      <li>Stores your name in a variable.</li>
+      <li>Stores your favorite snack in another variable.</li>
+      <li>Uses <code>puts</code> to print a fun message like:<br> Hey Sam! Let's grab some popcorn and code together! 🚀</li>
+    </ul>
+
+    <p>💬 Use your own name and snack. Make it YOU.</p>
+  HEREDOC
+  
+  level: level_one)
+
 lesson_one.photo.attach(io: file, filename: "Arrays.png", content_type: "image/png")
 lesson_one.save!
+ 
 
 puts "Creating Lesson 2 in Level 1"
 

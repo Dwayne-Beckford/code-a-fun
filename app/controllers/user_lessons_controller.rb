@@ -31,7 +31,7 @@ class UserLessonsController < ApplicationController
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: "Provide feedback to a students coding input in Ruby. Use fun encouraging tone of voice and be very specific about where the error is. Do not give an answer but you can ask questions that will help the student figure it out. The feedback shouldn’t be too long. Bear in mind you don’t know what student attempt is this so avoid phrases like “great start”.  If the answer is 90% or more correct, say that the answer is ready for submitting.
+      messages: [{ role: "user", content: "Provide feedback to a students coding input in Ruby. Use fun encouraging tone of voice and be very specific about where the error is. Do not give an answer but you can ask questions that will help the student figure it out. The feedback shouldn’t be too long. Bear in mind you don’t know what student attempt is this so avoid phrases like “great start”.  If the answer is 90% or more correct, say that the answer is ready for submitting. Respond in raw HTML. Use <p> tags every 1–2 sentences. Format any code using <pre><code> blocks. Do not include markdown or triple backticks.
         Here’s the lesson name:#{@user_lesson.lesson.name}
         Here’s the lesson description:#{@user_lesson.lesson.description}
         Here’s the lesson concept the person has been taught:#{@user_lesson.lesson.concept}
@@ -89,7 +89,7 @@ class UserLessonsController < ApplicationController
         completed_lesson_ids.include?(lesson_id)
       end
 
-      
+
       # If yes, mark level as completed
       if all_completed
         current_user.points += 40
@@ -102,13 +102,13 @@ class UserLessonsController < ApplicationController
         when 5 then "🏆"
         else "🏅"
         end
-        
+
         Achievement.find_or_create_by!(user: current_user, name: badge)
       end
-      
+
       # adding progress to the progress bar
       @progress_add = lesson_completed.to_f / level_lesson.to_f
-      
+
       current_user.save
 
       respond_to do |format|
