@@ -80,6 +80,10 @@
           <h1 class="modal-title fs-5" id="lessonCompleted">Congratulations!</h1>
         </div>
         <div class="modal-body">
+
+          <!--Adding points to user on the modal-->
+          <%= current_user.points %>
+
           <% if @user_lesson.lesson.number < 6 %>
             You've completed this lesson! Would you like to continue to the next one?
           <% else %>

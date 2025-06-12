@@ -5,6 +5,7 @@ class UserLessonsController < ApplicationController
   # before_action :set_user_lesson, only: %i[id]
 
   def show
+    @no_footer = true
     @user_lesson = UserLesson.find(params[:id])
     # UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
 
