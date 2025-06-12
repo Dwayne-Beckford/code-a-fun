@@ -1,15 +1,66 @@
+// Next lesson card
+
+.card-next-lesson {
+  overflow: hidden;
+  height: 250px;
+  background: white;
+  border-radius: 20px;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  box-shadow: 8px 8px 0 #c2c2c2;
+  box-sizing: border-box;
+}
+
+.card-next-lesson img {
+  height: 100%;
+  width: 40%;
+  object-fit: cover;
+}
+
+.card-next-lesson-info {
+  padding: 16px 32px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.card-next-lesson-info h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.card-next-lesson-info p {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: .7;
+  font-family: "Space Mono", "Courier New", monospace;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.card-next-lesson-info a {
+  margin: 0;
+  align-self: flex-start; /* keeps button aligned left, no stretch */
+  width: auto; /* prevents full-width stretch */
+}
+
 // Finished lessons card
 .card-lesson {
-  overflow: hidden;
   background: white;
   border-radius: 20px;
   border: 2px solid black;
   max-width: 300px;
-  max-height: 300px;
   margin: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   box-shadow: 8px 8px 0 #c2c2c2;
 }
 
@@ -37,58 +88,13 @@
 }
 
 .card-lesson-info {
-  padding: 16px 16px 0px 16px;
+  padding: 16px 16px 0 16px;
   flex-grow: 1; // helps it take remaining space
 }
 
-
-// Next lesson card
-
-.card-next-lesson {
-  overflow: hidden;
-  height: 200px;
-  background: white;
-  border-radius: 20px;
-  border: 3px solid black;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  box-shadow: 8px 8px 0 #c2c2c2;
-}
-
-.card-next-lesson-info {
-  padding: 16px;
-}
-
-.card-next-lesson img {
-  height: 100%;
-  width: 40%;
-  object-fit: cover;
-}
-
-.card-next-lesson h2 {
-  padding-top: 16px;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.card-next-lesson p {
-  font-size: 16px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 16px;
-  margin-top: 8px;
-  font-family: "Space Mono", "Courier New", monospace;
-}
-
-.card-next-lesson a {
-  margin-bottom: 50px !important;
-}
-
-.card-next-lesson .card-next-lesson-info {
-  padding: 16px;
-  padding-left: 32px;
+.card-lesson-info p {
+  padding: 16px 16px 0 16px;
+  flex-grow: 1; // helps it take remaining space
 }
 
 // Level card

@@ -2,7 +2,7 @@
 <div class="container-dashboard">
 
 <!--Greeting line-->
-<h2 class="mt-5">Hi <%= current_user.name %>, just <%= @uncompleted_in_current_level_count %> lessons until you can build <%= @current_level.name %> game. Let’s go!</h1>
+<h2 class="mt-5">Hi <%= current_user.name %>, you're just <%= @uncompleted_in_current_level_count %> lessons away from build the <%= @current_level.name %> game. Let’s go!</h1>
 
 <!--Progress bar-->
 <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
@@ -17,7 +17,7 @@
     <h2><%= @next_lesson.name %></h2>
     <p><%= @next_lesson.description%></p>
     <% if @user_lesson %>
-      <%= link_to "START", user_lesson_path(@user_lesson), class: "btn-one mb-5" %>
+      <%= link_to "START", user_lesson_path(@user_lesson), class: "btn-one" %>
     <% else %>
       <p>All lessons finished</p>
     <% end %>
@@ -26,8 +26,11 @@
 
 <!--Past Lessons-->
 <h2 class="mt-5 text-center">Want to Refresh Your Memory?</h2>
+
 <% if @completed_lessons.any? %>
 <div class="lessons-grid">
+
+  <!--Past Lessons Cards-->
   <% @completed_lessons.each do |user_lesson| %>
   <div class="card-lesson">
     <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
@@ -36,6 +39,7 @@
       <p><%= user_lesson.lesson.description %></p>
     </div>
   </div>
+
   <% end %>
 </div>
 <% else %>
