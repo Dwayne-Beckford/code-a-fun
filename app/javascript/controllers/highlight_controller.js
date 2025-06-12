@@ -16,7 +16,11 @@ export default class extends Controller {
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
 
-    highlight.innerHTML = window.Prism.highlight(code, window.Prism.languages.ruby, "ruby")
+    highlight.innerHTML = window.Prism.highlight(
+      code,
+      window.Prism.languages.ruby,
+      "ruby"
+    )
   }
 
   handleTab(event) {
@@ -29,7 +33,9 @@ export default class extends Controller {
       const indent = "  "
 
       textarea.value =
-        textarea.value.substring(0, start) + indent + textarea.value.substring(end)
+        textarea.value.substring(0, start) +
+        indent +
+        textarea.value.substring(end)
 
       textarea.selectionStart = textarea.selectionEnd = start + indent.length
 
