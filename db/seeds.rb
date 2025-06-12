@@ -25,10 +25,25 @@ diana = User.create(email:"diana@test.com", password: "123456", name: "Diana", p
 david = User.create(email:"david@test.com", password: "123456", name: "David", points: 100)
 
 puts "Creating 4 Levels"
+file = File.open("app/assets/images/game-1.gif")
 level_one = Level.create(number: 1, name: "Ruby Basics")
+level_one.photo.attach(io: file, filename: "Basics.png", content_type: "image/gif")
+level_one.save!
+
+file = File.open("app/assets/images/game-4.gif")
 level_two = Level.create(number: 2, name: "Snake")
+level_two.photo.attach(io: file, filename: "Snake.png", content_type: "image/gif")
+level_two.save!
+
+file = File.open("app/assets/images/game-5.gif")
 level_three = Level.create(number: 3, name: "Dodge the Meteor")
-level_four = Level.create(number: 4, name: "Super Challenge")
+level_three.photo.attach(io: file, filename: "Meteor.png", content_type: "image/gif")
+level_three.save!
+
+file = File.open("app/assets/images/game-3.gif")
+level_four = Level.create(number: 4, name: "Wack-a-Dot")
+level_four.photo.attach(io: file, filename: "Wack-a-Dot.png", content_type: "image/gif")
+level_four.save!
 
 puts "Creating Lesson 1 in Level 1"
 file = File.open("app/assets/images/seed/Arrays.png")
