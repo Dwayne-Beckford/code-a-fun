@@ -34,7 +34,11 @@
   <!--Past Lessons Cards-->
   <% @completed_lessons.each do |user_lesson| %>
   <div class="card-lesson">
-    <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+    <% if user_lesson.lesson.photo.attached? %>
+      <%= cl_image_tag user_lesson.lesson.photo.key %>
+    <% else %>
+      <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+    <% end %>
     <div class="card-lesson-info">
       <h2><%= link_to user_lesson.lesson.name, user_lesson_path(user_lesson) %></h2>
       <p><%= user_lesson.lesson.description %></p>
