@@ -10,3 +10,28 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper > *:not(.footer) {
+  flex: 1;
+}
+
+.footer {
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0px 50px;
+  color: white !important;
+}
