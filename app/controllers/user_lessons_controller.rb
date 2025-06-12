@@ -81,18 +81,11 @@ class UserLessonsController < ApplicationController
       lessons_in_level = Lesson.where(level: current_level).pluck(:id)
       level_lesson = lessons_in_level.count
 
-      # Get completed lesson IDs for this user
-      completed_lesson_ids = current_user.user_lessons.completed.pluck(:lesson_id)
-      lesson_completed = completed_lesson_ids.count
-
-      # Check if all lessons are completed
-      all_completed = lessons_in_level.all? do |lesson_id|
-        completed_lesson_ids.include?(lesson_id)
-      end
-
+      # Get completed lesson count for this user
+      lesson_completed_count = current_user.user_lessons.completed.count
 
       # If yes, mark level as completed
-      if all_completed
+      if current_level.completed_by_user?(current_user)
         current_user.points += 40
         # 🎖️ Achievement based on level number
         badge = case current_level.number
@@ -108,7 +101,7 @@ class UserLessonsController < ApplicationController
       end
 
       # adding progress to the progress bar
-      @progress_add = lesson_completed.to_f / level_lesson.to_f
+      @progress_add = lesson_completed_count.to_f / level_lesson
 
       current_user.save
 
