@@ -1,0 +1,28 @@
+<div <%= "data-controller=concept" if local_assigns[:show_modal] %> class="modal fade" id="completionModal" tabindex="-1" aria-labelledby="lessonCompleted" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-center d-flex flex-column align-items-center justify-content-center">
+        <h1 class="modal-title fs-5" id="lessonCompleted">Congratulations!</h1>
+      </div>
+      <div class="modal-body text-center d-flex flex-column align-items-center justify-content-center">
+        <% if user_lesson.last_lesson_on_level? %>
+          <p>You've won <strong>50 points</strong> by completing this level! 👏</p>
+          <% if current_user.achievements.any? %>
+            <p>Reward unlocked:</p>
+            <p class="achievement"><%= current_user.achievements.last.name %></p>
+          <% end %>
+        <% else %>
+          <p>You've won <strong>10 points</strong> by completing this lesson! 👏</p>
+        <% end %>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <%#= link_to "Dashboard", dashboard_path, class: "btn-second" %>
+        <% if next_user_lesson %>
+          <%= link_to "Next Lesson", user_lesson_path(next_user_lesson), class: "btn-one" %>
+        <% else %>
+          <%= link_to "Back to Dashboard", dashboard_path, class: "btn-second" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

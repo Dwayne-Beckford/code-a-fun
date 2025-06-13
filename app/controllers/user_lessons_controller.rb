@@ -9,22 +9,7 @@ class UserLessonsController < ApplicationController
     @user_lesson = UserLesson.find(params[:id])
     # UserLevel.find_or_create_by(user: current_user, level: @user_lesson.lesson.level)
 
-    @next_lesson_number = @user_lesson.lesson.number + 1
-    @next_level_number = @user_lesson.lesson.level.number + 1
-
-    @next_lesson = Lesson.find_by(number: @next_lesson_number)
-
-    if @next_lesson.present?
-      @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
-    else
-      # level complete, go to next level
-      @next_level = Level.find_by(number: @next_level_number)
-      @next_lesson = Lesson.find_by(number: 1, level: @next_level)
-      if @next_lesson
-        @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
-      end
-      # else there is no more next_user_lesson
-    end
+    set_next_levels_and_lessons
   end
 
   def feedback
@@ -57,6 +42,8 @@ class UserLessonsController < ApplicationController
 
     # Validate user input with ai response
     @user_lesson.ai_response = validate_answer_with_ai(@user_lesson)
+
+    set_next_levels_and_lessons
 
     # Set default to false
     @correct = false
@@ -149,5 +136,24 @@ class UserLessonsController < ApplicationController
 
   def user_lesson_params
     params.require(:user_lesson).permit(:user_input)
+  end
+
+  def set_next_levels_and_lessons
+    @next_lesson_number = @user_lesson.lesson.number + 1
+    @next_level_number = @user_lesson.lesson.level.number + 1
+
+    @next_lesson = Lesson.find_by(number: @next_lesson_number)
+
+    if @next_lesson.present?
+      @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
+    else
+      # level complete, go to next level
+      @next_level = Level.find_by(number: @next_level_number)
+      @next_lesson = Lesson.find_by(number: 1, level: @next_level)
+      if @next_lesson
+        @next_user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @next_lesson)
+      end
+      # else there is no more next_user_lesson
+    end
   end
 end

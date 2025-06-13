@@ -13,6 +13,16 @@ class User < ApplicationRecord
     end
   end
 
+  def current_level
+    return Level.first if self.user_lessons.empty?
+
+    if self.user_lessons.incompleted.first
+      self.user_lessons.incompleted.first.lesson.level
+    elsif self.user_lessons.completed.last
+      self.user_lessons.completed.last.lesson.level
+    end
+  end
+
 
   def level_progress(level)
     total_lessons_count = level.lessons.count

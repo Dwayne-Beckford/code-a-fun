@@ -23,7 +23,7 @@
           <% end %>
           </li>
           <li class="user-nav-item">Level:
-            <%= @user_lesson.lesson.level.number %>
+            <%= current_user.current_level.number %>
           </li>
           <li class="user-nav-item">xp:<%= current_user.points%></li>
           <li class="nav-item">
