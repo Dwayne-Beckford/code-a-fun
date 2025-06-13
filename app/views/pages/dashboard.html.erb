@@ -11,7 +11,7 @@
 
 <h2 class="mt-5 text-center">Next Lesson</h2>
 <div class="card-next-lesson">
-  <%= image_tag('seed/Classes.png', alt: 'Classes') %>
+  <%= cl_image_tag @user_lesson.lesson.photo.key %>
   <div class="card-next-lesson-info">
     <h2><%= @next_lesson.name %></h2>
     <p><%= @next_lesson.description%></p>
@@ -52,11 +52,19 @@
   <p>You haven’t completed any lessons yet. Let’s get started! 🚀</p>
 <% end %>
 
-<!--Remove when done-->
-<h2 class="mt-4">Completed Levels</h3>
-<ul>
+<!--Levels-->
+<h2 class="mt-5 text-center">Completed Levels</h3>
+<div class="lessons-grid">
   <% @levels.each do |level| %>
-    <li><%= level.name %></li>
+    <div class="card-level">
+      <% if level.photo.attached? %>
+        <%= cl_image_tag level.photo.key %>
+      <% else %>
+        <%= image_tag('seed/Arrays.png', alt: 'Arrays') %>
+      <% end %>
+      <h2><%= level.name %></h2>
+    </div>
   <% end %>
-</ul>
+</div>
+
 </div>

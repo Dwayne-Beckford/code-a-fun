@@ -93,8 +93,8 @@ class UserLessonsController < ApplicationController
         when 2 then "🥈"
         when 3 then "🥇"
         when 4 then "🎖️"
-        when 5 then "🏆"
-        else "🏅"
+        when 5 then "🏅"
+        else "🏆"
         end
 
         Achievement.find_or_create_by!(user: current_user, name: badge)
