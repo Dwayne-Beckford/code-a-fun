@@ -22,7 +22,7 @@ User.destroy_all
 
 puts "Creating users"
 diana = User.create(email:"diana@test.com", password: "123456", name: "Diana", points: 0)
-david = User.create(email:"david@test.com", password: "123456", name: "David", points: 500)
+david = User.create(email:"matvey@test.com", password: "123456", name: "Matvey", points: 500)
 
 puts "Creating Level 1"
 file = File.open("app/assets/images/l-1.gif")
@@ -368,12 +368,16 @@ lesson_nine = Lesson.create(
   task: <<~TASK,
     <p>🚀 Your mission, should you choose to accept it: build <strong>Dodge the Meteor</strong> — a game so thrilling, you’ll forget it’s teaching you code.</p>
 
-    <p>Set up your player, spawn meteors, and increase the speed as the score climbs. Show the score on screen and end the game when a meteor collides with the player.</p>
+    <p>Your game should:</p>
+  <ul>
+    <li>Let the player move smoothly using arrow keys</li>
+    <li>Spawn meteors that fall from the top</li>
+    <li>Detect when a meteor collides with the player (and end the game)</li>
+    <li>Keep score based on how long the player survives</li>
+  </ul>
 
-    <p>And if you want to go all-in: add a “Game Over” screen that looks like it was written by a dramatic space commander.</p>
-
-    <p><strong>Final tip:</strong> Surviving this lesson = earning serious dev cred. You’re not just dodging meteors… you’re dodging mediocrity. 🌟</p>
-  TASK
+  <p>May your reflexes be fast and your code even faster. 🧠🎮</p>
+TASK
 )
 lesson_nine.photo.attach(io: file, filename: "game-5.gif", content_type: "image/gif")
 lesson_nine.save!

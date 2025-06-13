@@ -16,7 +16,7 @@
         <% end %>
       </div>
       <div class="modal-footer justify-content-center">
-        <%#= link_to "Dashboard", dashboard_path, class: "btn-second" %>
+        <%= link_to "Dashboard", dashboard_path, class: "btn-second" %>
         <% if next_user_lesson %>
           <%= link_to "Next Lesson", user_lesson_path(next_user_lesson), class: "btn-one" %>
         <% else %>
