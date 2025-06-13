@@ -25,11 +25,7 @@
           <% end %>
           </li>
           <li class="user-nav-item">Level:
-          <% if @current_level %>
-            <%= @current_level.number %>
-          <% else %>
-            All completed! 🎉
-          <% end %>
+            <%= current_user.current_level.number %>
           </li>
           <li class="user-nav-item">xp:<%= current_user.points%></li>
           <li class="nav-item">
